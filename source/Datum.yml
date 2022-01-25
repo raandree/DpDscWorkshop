@@ -3,14 +3,16 @@ ResolutionPrecedence:
   - Environment\$($Node.Environment)
   - Locations\$($Node.Location)
   - Roles\$($Node.Role)
-  - Baselines\$($Node.ServiceTypeDeviation)
-  - Baselines\$($Node.ServiceType)
+  - ServiceTypes\$($Node.ServiceTypeDeviation)
+  - ServiceTypes\$($Node.ServiceType)
   - Baselines\DscLcm
 
 DatumHandlers:
   Datum.ProtectedData::ProtectedDatum:
     CommandOptions:
       PlainTextPassword: SomeSecret
+  Datum.InvokeCommand::InvokeCommand:
+    SkipDuringLoad: true
 
 default_lookup_options: MostSpecific
 
@@ -40,19 +42,27 @@ lookup_options:
       tuple_keys:
         - DestinationPath
 
-  RegistryValues:
+  WebConfigProperties:
     merge_hash: deep
-  RegistryValues\Values:
+  WebConfigProperties\Items:
     merge_hash_array: UniqueKeyValTuples
     merge_options:
       tuple_keys:
-        - Key
+        - Filter
+        - WebsitePath
+        - PropertyName
 
-  NetworkIpConfiguration:
+  WebConfigPropertyCollections:
     merge_hash: deep
-
-  ComputerSettings:
-    merge_hash: deep
+  WebConfigPropertyCollections\Items:
+    merge_hash_array: UniqueKeyValTuples
+    merge_options:
+      tuple_keys:
+        - Filter
+        - WebsitePath
+        - CollectionName
+        - ItemKeyValue
+        - ItemPropertyName
 
   LcmConfig:
     merge_hash: deep

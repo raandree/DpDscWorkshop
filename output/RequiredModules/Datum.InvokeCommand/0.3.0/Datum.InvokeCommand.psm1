@@ -1,4 +1,4 @@
-#Region './Prefix.ps1' 0
+#Region '.\Prefix.ps1' 0
 $here = $PSScriptRoot
 $modulePath = Join-Path -Path $here -ChildPath 'Modules'
 
@@ -9,8 +9,8 @@ $script:localizedData = Get-LocalizedData -DefaultUICulture en-US
 $config = Import-PowerShellDataFile -Path $here\Config\Datum.InvokeCommand.Config.psd1
 $regExString = '{0}(?<Content>((.|\s)+)?){1}' -f [regex]::Escape($config.Header), [regex]::Escape($config.Footer)
 $global:datumInvokeCommandRegEx = New-Object Text.RegularExpressions.Regex($regExString, ('IgnoreCase', 'Compiled'))
-#EndRegion './Prefix.ps1' 11
-#Region './Private/Get-DatumCurrentNode.ps1' 0
+#EndRegion '.\Prefix.ps1' 11
+#Region '.\Private\Get-DatumCurrentNode.ps1' 0
 function Get-DatumCurrentNode
 {
     param (
@@ -31,8 +31,8 @@ function Get-DatumCurrentNode
         $fileNode
     }
 }
-#EndRegion './Private/Get-DatumCurrentNode.ps1' 21
-#Region './Private/Get-RelativeNodeFileName.ps1' 0
+#EndRegion '.\Private\Get-DatumCurrentNode.ps1' 21
+#Region '.\Private\Get-RelativeNodeFileName.ps1' 0
 function Get-RelativeNodeFileName
 {
     [CmdletBinding()]
@@ -60,8 +60,8 @@ function Get-RelativeNodeFileName
         Write-Verbose 'Get-RelativeNodeFileName: nothing to catch'
     }
 }
-#EndRegion './Private/Get-RelativeNodeFileName.ps1' 28
-#Region './Private/Get-ValueKind.ps1' 0
+#EndRegion '.\Private\Get-RelativeNodeFileName.ps1' 28
+#Region '.\Private\Get-ValueKind.ps1' 0
 function Get-ValueKind
 {
     [OutputType([hashtable])]
@@ -115,8 +115,8 @@ function Get-ValueKind
         Write-Error "Get-ValueKind: The value '$InputObject' could not be parsed. It is not a scriptblock nor a string."
     }
 }
-#EndRegion './Private/Get-ValueKind.ps1' 54
-#Region './Private/Invoke-InvokeCommandActionInternal.ps1' 0
+#EndRegion '.\Private\Get-ValueKind.ps1' 54
+#Region '.\Private\Invoke-InvokeCommandActionInternal.ps1' 0
 function Invoke-InvokeCommandActionInternal
 {
     param (
@@ -190,8 +190,8 @@ function Invoke-InvokeCommandActionInternal
         return $DatumType.Value
     }
 }
-#EndRegion './Private/Invoke-InvokeCommandActionInternal.ps1' 74
-#Region './Public/Invoke-InvokeCommandAction.ps1' 0
+#EndRegion '.\Private\Invoke-InvokeCommandActionInternal.ps1' 74
+#Region '.\Public\Invoke-InvokeCommandAction.ps1' 0
 function Invoke-InvokeCommandAction
 {
     <#
@@ -319,8 +319,8 @@ function Invoke-InvokeCommandAction
     }
 
 }
-#EndRegion './Public/Invoke-InvokeCommandAction.ps1' 128
-#Region './Public/Test-InvokeCommandFilter.ps1' 0
+#EndRegion '.\Public\Invoke-InvokeCommandAction.ps1' 128
+#Region '.\Public\Test-InvokeCommandFilter.ps1' 0
 function Test-InvokeCommandFilter
 {
     <#
@@ -371,4 +371,5 @@ function Test-InvokeCommandFilter
         return $false
     }
 }
-#EndRegion './Public/Test-InvokeCommandFilter.ps1' 51
+#EndRegion '.\Public\Test-InvokeCommandFilter.ps1' 51
+

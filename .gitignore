@@ -6,6 +6,7 @@ output/RequiredModules/*
 
 !output/RequiredModules/Datum
 !output/RequiredModules/Datum.InvokeCommand
+!output/RequiredModules/Sampler.DscPipeline
 !output/RequiredModules/PSDesiredStateConfiguration
 
 **.bak

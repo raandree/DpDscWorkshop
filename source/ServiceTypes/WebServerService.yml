@@ -1,0 +1,65 @@
+Configurations:
+  - WindowsFeatures
+  - FilesAndFolders
+  - WebConfigProperties
+  - WebConfigPropertyCollections
+
+WindowsFeatures:
+  - Web-Static-Content
+  - Web-Default-Doc
+  - Web-Http-Errors
+  - Web-Asp-Net
+  - Web-Net-Ext
+  - Web-ISAPI-Ext
+  - Web-ISAPI-Filter
+  - Web-Http-Logging
+  - Web-Request-Monitor
+  - Web-Http-Tracing
+  - Web-Filtering
+  - Web-Stat-Compression
+  - Web-Dyn-Compression
+  - Web-Mgmt-Console
+  - Web-Windows-Auth
+
+FilesAndFolders:
+  Items:
+    - DestinationPath: E:\Inetpub\wwwroot
+      Type: Directory
+
+WebConfigProperties:
+  Items:
+  - WebsitePath: 'MACHINE/WEBROOT/APPHOST'
+    Filter: system.applicationHost/applicationPools/applicationPoolDefaults
+    PropertyName: enable32BitAppOnWin64
+    Value: false
+
+WebConfigPropertyCollections:
+  Items:
+    - WebsitePath: MACHINE/WEBROOT/APPHOST
+      Filter: system.webServer/isapiFilters
+      CollectionName: .
+      ItemName: filter
+      ItemKeyName: name
+      ItemKeyValue: ASP.Net_2.0.50727-64
+      ItemPropertyName: enabled
+      ItemPropertyValue: false
+    - WebsitePath: MACHINE/WEBROOT/APPHOST
+      Filter: system.webServer/isapiFilters
+      CollectionName: .
+      ItemName: filter
+      ItemKeyName: name
+      ItemKeyValue: ASP.Net_4.0_64bit
+      ItemPropertyName: enabled
+      ItemPropertyValue: false
+    - WebsitePath: MACHINE/WEBROOT/APPHOST
+      Filter: system.webServer/security/isapiCgiRestriction
+      CollectionName: .
+      ItemName: add
+      ItemKeyName: path
+      ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\aspnet_isapi.dll
+      ItemPropertyName: allowed
+      ItemPropertyValue: false
+
+DscTagging:
+  Layers:
+    - Roles\WebServer

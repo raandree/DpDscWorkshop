@@ -1,4 +1,4 @@
-NodeName: OSS001
+NodeName: OSS002
 Environment: Test
 Role: OfficeOnlinePrimary
 Description: OfficeOnline Server in Test

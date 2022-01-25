@@ -1,4 +1,4 @@
-@{
+﻿@{
 
     RootModule        = 'Datum.InvokeCommand.psm1'
 
@@ -30,9 +30,9 @@
 
             IconUri      = 'https://dsccommunity.org/images/DSC_Logo_300p.png'
 
-            Prerelease   = 'preview0002'
+            Prerelease   = 'preview0001'
 
-            ReleaseNotes = '## [0.3.0-preview0002] - 2022-01-17
+            ReleaseNotes = '## [0.3.0-preview0001] - 2022-01-17
 
 ### Added
 

@@ -65,7 +65,7 @@ BeforeDiscovery {
     $nodeRoles = $nodes | ForEach-Object -MemberName Role
     $nodeRoleTests = foreach ($nodeRole in $nodeRoles)
     {
-        $roleDefinitions | Where-Object FullName -like "*$($nodeRole)*" | ForEach-Object { @{FullName = $_.FullName } }
+        $roleDefinitions | Where-Object FullName -Like "*$($nodeRole)*" | ForEach-Object { @{FullName = $_.FullName } }
     }
 
     $nodeTestsAllNodes = @(@{ConfigurationData = $configurationData })
@@ -125,7 +125,7 @@ Describe 'Node Definition Files' -Tag Integration {
 
 
 Describe 'Roles Definition Files' -Tag Integration {
-    It "<FullName> has valid yaml" -TestCases $nodeRoleTests {
+    It '<FullName> has valid yaml' -TestCases $nodeRoleTests {
         { $null = Get-Content -Raw -Path $FullName | ConvertFrom-Yaml } | Should -Not -Throw
     }
 }
@@ -136,9 +136,13 @@ Describe 'Role Composition' -Tag Integration {
         { Resolve-Datum -PropertyPath Configurations -Node $node -DatumTree $datum } | Should -Not -Throw
     }
 
-    It "No duplicate IP addresses should be used" -TestCases $nodeTestsAllNodes {
+    It 'No duplicate IP addresses should be used' -TestCases $nodeTestsAllNodes {
         $allIps = $configurationData.AllNodes.NetworkIpConfiguration.Interfaces.IpAddress
         $selectedIps = $allIps | Select-Object -Unique
-        Compare-Object -ReferenceObject $allIps -DifferenceObject $selectedIps | Should -BeNull
+
+        if ($allIps -and $selectedIps)
+        {
+            Compare-Object -ReferenceObject $allIps -DifferenceObject $selectedIps | Should -BeNull
+        }
     }
 }

@@ -1,0 +1,210 @@
+Configurations:
+  - WindowsFeatures
+  - FilesAndFolders
+  - WebConfigProperties
+  - WebConfigPropertyCollections
+
+WindowsFeatures:
+  - Web-Server
+  - Web-Mgmt-Tools
+  - Web-Mgmt-Console
+  - Web-WebServer
+  - Web-Common-Http
+  - Web-Default-Doc
+  - Web-Static-Content
+  - Web-Performance
+  - Web-Stat-Compression
+  - Web-Dyn-Compression
+  - Web-Security
+  - Web-Filtering
+  - Web-Windows-Auth
+  - Web-App-Dev
+  - Web-Net-Ext45
+  - Web-Asp-Net45
+  - Web-ISAPI-Ext
+  - Web-ISAPI-Filter
+  - Web-Includes
+  - NET-Framework-Features
+  - NET-Framework-Core
+  - NET-HTTP-Activation
+  - NET-Non-HTTP-Activ
+  - NET-WCF-HTTP-Activation45
+  - Server-Media-Foundation
+  - Windows-Identity-Foundation
+
+FilesAndFolders:
+  Items:
+    - DestinationPath: E:\Inetpub\wwwroot
+      Type: Directory
+
+WebConfigProperties:
+  Items:
+    #Application Pool Defaults
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.applicationHost/applicationPools/applicationPoolDefaults
+    PropertyName: enable32BitAppOnWin64
+    Value: false
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.applicationHost/applicationPools/applicationPoolDefaults
+    PropertyName: startMode
+    Value: OnDemand
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.applicationHost/applicationPools/applicationPoolDefaults/processModel
+    PropertyName: idleTimeout
+    Value: 00:20:00
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.applicationHost/applicationPools/applicationPoolDefaults/recycling/periodicRestart
+    PropertyName: time
+    Value: 1.05:00:00
+
+    # Deviation from datacenter standard for IIS
+    # IIS Machine Key Configuration
+  - WebsitePath: MACHINE/WEBROOT
+    Filter: system.web/machineKey
+    PropertyName: decryption
+    Value: Auto
+  - WebsitePath: MACHINE/WEBROOT
+    Filter: system.web/machineKey
+    PropertyName: decryptionKey
+    Value: AutoGenerate,IsolateApps
+  - WebsitePath: MACHINE/WEBROOT
+    Filter: system.web/machineKey
+    PropertyName: validation
+    Value: SHA1
+  - WebsitePath: MACHINE/WEBROOT
+    Filter: system.web/machineKey
+    PropertyName: validationKey
+    Value: AutoGenerate,IsolateApps
+
+    # IIS ApplicationPool Defauls / not implemented yet
+    #DependsOn: [WindowsFeatureSet]OfficeOnlineServerFeatures
+    #IsSingleInstance: Yes
+    #ManagedRuntimeVersion: v4.0
+    #IdentityType: ApplicationPoolIdentity
+
+     # Default Authentication
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/authentication/anonymousAuthentication
+    PropertyName: enabled
+    Value: True
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/authentication/windowsAuthentication
+    PropertyName: enabled
+    Value: True
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/authentication/windowsAuthentication
+    PropertyName: useAppPoolCredentials
+    Value: False
+
+WebConfigPropertyCollections:
+  Items:
+    # ISAPI Filter
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/isapiFilters
+    CollectionName: .
+    ItemName: filter
+    ItemKeyName: name
+    ItemKeyValue: ASP.Net_2.0.50727-64
+    ItemPropertyName: enabled
+    ItemPropertyValue: true
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/isapiFilters
+    CollectionName: .
+    ItemName: filter
+    ItemKeyName: name
+    ItemKeyValue: ASP.Net_4.0_64bit
+    ItemPropertyName: enabled
+    ItemPropertyValue: true
+
+    # isapiCgiRestriction
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\aspnet_isapi.dll
+    ItemPropertyName: allowed
+    ItemPropertyValue: True
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework64\v2.0.50727\aspnet_isapi.dll
+    ItemPropertyName: groupId
+    ItemPropertyValue: ASP.NET v2.0.50727
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\aspnet_isapi.dll
+    ItemPropertyName: groupId
+    ItemPropertyValue: ASP.NET v2.0.50727
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\aspnet_isapi.dll
+    ItemPropertyName: allowed
+    ItemPropertyValue: True
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\aspnet_isapi.dll
+    ItemPropertyName: groupId
+    ItemPropertyValue: ASP.NET v4.0.30319
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/isapiCgiRestriction
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: path
+    ItemKeyValue: C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\aspnet_isapi.dll
+    ItemPropertyName: groupId
+    ItemPropertyValue: ASP.NET v4.0.30319
+
+    # Default Authentication
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/authentication/windowsAuthentication
+    CollectionName: providers
+    ItemName: add
+    ItemKeyName: '*'
+    ItemKeyValue: Negotiate
+    ItemPropertyName: value
+    ItemPropertyValue: Negotiate
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Filter: system.webServer/security/authentication/windowsAuthentication
+    CollectionName: providers
+    ItemName: add
+    ItemKeyName: '*'
+    ItemKeyValue: NTLM
+    ItemPropertyName: value
+    ItemPropertyValue: NTLM
+
+    # requestFiltering
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Ensure:  Absent
+    Filter: system.webServer/security/requestFiltering/fileExtensions
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: fileExtension
+    ItemKeyValue: .xml
+    ItemPropertyName: allowed
+    ItemPropertyValue: false
+
+  - WebsitePath: MACHINE/WEBROOT/APPHOST
+    Ensure:  Absent
+    Filter: system.webServer/security/requestFiltering/fileExtensions
+    CollectionName: .
+    ItemName: add
+    ItemKeyName: fileExtension
+    ItemKeyValue: .txt
+    ItemPropertyName: allowed
+    ItemPropertyValue: false
+
+DscTagging:
+  Layers:
+    - Roles\WebServer

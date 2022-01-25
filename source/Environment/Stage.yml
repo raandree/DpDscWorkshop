@@ -1,0 +1,9 @@
+DscTagging:
+  Environment: Stage
+  Layers:
+    - Environment\Stage
+
+FilesAndFolders:
+  Items:
+    - DestinationPath: C:\Test\Stage-Environment
+      Type: Directory
