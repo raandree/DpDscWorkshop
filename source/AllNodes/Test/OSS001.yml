@@ -1,0 +1,22 @@
+NodeName: OSS001
+Environment: Test
+Role: OfficeOnlinePrimary
+Description: OfficeOnline Server in Test
+Location: DataCenterIntranet
+Baseline: WebServer
+
+ComputerSettings:
+  Name: '[x= { $Node.NodeName } =]'
+  Description: '[x= { $Node.Description } =]'
+
+PSDscAllowPlainTextPassword: True
+PSDscAllowDomainUser: True
+
+LcmConfig:
+  ConfigurationRepositoryWeb:
+    Server:
+      ConfigurationNames: '[x= { $Node.NodeName } =]'
+
+DscTagging:
+  Layers:
+    - '[x= { Get-RelativeFileName -Path $File } =]'

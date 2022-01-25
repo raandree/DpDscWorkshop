@@ -1,0 +1,3 @@
+DscTagging:
+  Layers:
+    - '[x={ Get-RelativeFileName -Path $File } =]'

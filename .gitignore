@@ -2,6 +2,11 @@
 
 output/*
 !output/RequiredModules
+output/RequiredModules/*
+
+!output/RequiredModules/Datum
+!output/RequiredModules/Datum.InvokeCommand
+!output/RequiredModules/PSDesiredStateConfiguration
 
 **.bak
 *.local.*
