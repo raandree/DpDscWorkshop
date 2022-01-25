@@ -5,21 +5,22 @@ Configurations:
   - WebConfigPropertyCollections
 
 WindowsFeatures:
-  - Web-Static-Content
-  - Web-Default-Doc
-  - Web-Http-Errors
-  - Web-Asp-Net
-  - Web-Net-Ext
-  - Web-ISAPI-Ext
-  - Web-ISAPI-Filter
-  - Web-Http-Logging
-  - Web-Request-Monitor
-  - Web-Http-Tracing
-  - Web-Filtering
-  - Web-Stat-Compression
-  - Web-Dyn-Compression
-  - Web-Mgmt-Console
-  - Web-Windows-Auth
+  Name:
+    - Web-Static-Content
+    - Web-Default-Doc
+    - Web-Http-Errors
+    - Web-Asp-Net
+    - Web-Net-Ext
+    - Web-ISAPI-Ext
+    - Web-ISAPI-Filter
+    - Web-Http-Logging
+    - Web-Request-Monitor
+    - Web-Http-Tracing
+    - Web-Filtering
+    - Web-Stat-Compression
+    - Web-Dyn-Compression
+    - Web-Mgmt-Console
+    - Web-Windows-Auth
 
 FilesAndFolders:
   Items:
@@ -28,10 +29,10 @@ FilesAndFolders:
 
 WebConfigProperties:
   Items:
-  - WebsitePath: 'MACHINE/WEBROOT/APPHOST'
-    Filter: system.applicationHost/applicationPools/applicationPoolDefaults
-    PropertyName: enable32BitAppOnWin64
-    Value: false
+    - WebsitePath: "MACHINE/WEBROOT/APPHOST"
+      Filter: system.applicationHost/applicationPools/applicationPoolDefaults
+      PropertyName: enable32BitAppOnWin64
+      Value: false
 
 WebConfigPropertyCollections:
   Items:
