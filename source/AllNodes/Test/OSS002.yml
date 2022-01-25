@@ -1,14 +1,12 @@
 NodeName: OSS002
 Environment: Test
-Role: OfficeOnlinePrimary
+#Role: OfficeOnline
 Description: OfficeOnline Server in Test
 Location: DataCenterIntranet
 ServiceTypeDeviation: WebServerServiceOfficeOnline
 ServiceType: WebServerService
 
-ComputerSettings:
-  Name: '[x= { $Node.NodeName } =]'
-  Description: '[x= { $Node.Description } =]'
+OfficeOnlineMasterServer: OSS001
 
 PSDscAllowPlainTextPassword: True
 PSDscAllowDomainUser: True
