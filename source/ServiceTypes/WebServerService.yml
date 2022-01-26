@@ -5,7 +5,7 @@ Configurations:
   - WebConfigPropertyCollections
 
 WindowsFeatures:
-  Name:
+  Names:
     - Web-Static-Content
     - Web-Default-Doc
     - Web-Http-Errors

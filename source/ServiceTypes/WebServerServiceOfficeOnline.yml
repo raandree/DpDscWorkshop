@@ -5,7 +5,7 @@ Configurations:
   - WebConfigPropertyCollections
 
 WindowsFeatures:
-  Name:
+  Names:
     - Web-Server
     - Web-Mgmt-Tools
     - Web-Mgmt-Console
