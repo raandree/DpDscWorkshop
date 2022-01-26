@@ -1,12 +1,14 @@
 NodeName: OSS001
 Environment: Test
-Role: OfficeOnline
+Role: OfficeOnlinePrimary
 Description: OfficeOnline Server in Test
 Location: DataCenterIntranet
 ServiceTypeDeviation: WebServerServiceOfficeOnline
 ServiceType: WebServerService
 
-OfficeOnlineMasterServer: '[x= { $Node.NodeName } =]'
+OfficeOnlineServerFarmConfig:
+  AllowHttp: true
+  InternalUrl: http://contoso.com
 
 PSDscAllowPlainTextPassword: True
 PSDscAllowDomainUser: True

@@ -1,10 +1,6 @@
 Configurations:
   - OfficeOnlineServerSetup
-  - OfficeOnlineServerFarmConfig
-
-OfficeOnlineServerFarmConfig:
-  AllowHttp: true
-  InternalUrl: http://contoso.com
+  - OfficeOnlineServerMachineConfig
 
 OfficeOnlineServerSetup:
   Path: C:\OfficeOnline\Setup.exe

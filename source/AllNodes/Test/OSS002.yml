@@ -1,12 +1,13 @@
 NodeName: OSS002
 Environment: Test
-Role: OfficeOnline
+Role: OfficeOnlineSecondary
 Description: OfficeOnline Server in Test
 Location: DataCenterIntranet
 ServiceTypeDeviation: WebServerServiceOfficeOnline
 ServiceType: WebServerService
 
-OfficeOnlineMasterServer: OSS001
+OfficeOnlineServerMachineConfig:
+  MachineToJoin: OSS001
 
 PSDscAllowPlainTextPassword: True
 PSDscAllowDomainUser: True
