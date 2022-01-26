@@ -65,11 +65,12 @@ task TestConfigData {
     Write-Build DarkGray "OutputDirectory is: $OutputDirectory"
 
     Import-Module -Name Pester
-    $po = [PesterConfiguration]::new()
+    $po = New-PesterConfiguration
     $po.Run.PassThru = $true
     $po.Run.Path = [string[]]$ConfigDataPesterScript
     $po.Output.Verbosity = 'Detailed'
     $po.Filter.Tag = 'Integration'
+    $po.TestResult.Enabled = $true
     $po.TestResult.OutputFormat = 'NUnitXml'
     $po.TestResult.OutputPath = $testResultsPath
     $testResults = Invoke-Pester -Configuration $po

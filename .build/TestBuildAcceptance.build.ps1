@@ -79,7 +79,7 @@ task TestBuildAcceptance {
     Write-Build DarkGray "BuildOutput is: $BuildOutput"
 
     Import-Module -Name Pester
-    $po = [PesterConfiguration]::new()
+    $po = $po = New-PesterConfiguration
     $po.Run.PassThru = $true
     $po.Run.Path = [string[]]$AcceptanceTestDirectory
     $po.Output.Verbosity = 'Detailed'
@@ -88,6 +88,7 @@ task TestBuildAcceptance {
         $po.Filter.ExcludeTag = $excludeTag
     }
     $po.Filter.Tag = 'BuildAcceptance'
+    $po.TestResult.Enabled = $true
     $po.TestResult.OutputFormat = 'NUnitXml'
     $po.TestResult.OutputPath = $testResultsPath
     $testResults = Invoke-Pester -Configuration $po
