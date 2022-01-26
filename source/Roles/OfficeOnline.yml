@@ -1,15 +1,15 @@
 Configurations:
-  - OfficeOnlineServer
+  - OfficeOnlineServerSetup
+  - OfficeOnlineServerFarmConfig
 
-OfficeOnlineServer:
+OfficeOnlineServerFarmConfig:
+  AllowHttp: true
+  InternalUrl: http://contoso.com
+
+OfficeOnlineServerSetup:
   Path: C:\OfficeOnline\Setup.exe
-  InternalUrl: https://oos.contoso.com
-  CertificateName: OfficeOnlineServer
-  EditingEnabled: true
   LanguagePacks:
     - Language: de-de
       BinaryDir: C:\de-de
     - Language: en-us
       BinaryDir: C:\en-us
-  AllowHttp: true
-  MasterServer: '[x= { $Node.OfficeOnlineMasterServer } =]'
