@@ -38,6 +38,8 @@ task LoadDatumConfigData {
     Import-Module -Name PowerShell-Yaml -Scope Global
     Import-Module -Name Datum -Scope Global
 
+    Clear-DatumCache
+
     # Fix Import issue of Datum.InvokeCommand from vscode integrated terminal
     if (-not (Get-Command -Name Import-PowerShellDataFile -ErrorAction SilentlyContinue))
     {

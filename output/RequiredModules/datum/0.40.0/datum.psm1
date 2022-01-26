@@ -1979,5 +1979,8 @@ function Clear-DatumCache
 
     param ()
 
-    $rsopCache.Clear()
+    if ($rsopCache)
+    {
+        $rsopCache.Clear()
+    }
 }
