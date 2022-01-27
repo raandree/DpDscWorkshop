@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 This CDXML exposes the method DisableDebugConfiguration in MSFT_DSCLocalConfigurationManager CIM class as a cmdlet. To use this cmdlet please run the following command
 at the PowerShell prompt:
 

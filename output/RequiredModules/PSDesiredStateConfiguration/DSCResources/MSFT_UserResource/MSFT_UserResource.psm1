@@ -1,4 +1,4 @@
-# A global variable that contains localized messages.
+﻿# A global variable that contains localized messages.
 data LocalizedData
 {
 # culture="en-US"

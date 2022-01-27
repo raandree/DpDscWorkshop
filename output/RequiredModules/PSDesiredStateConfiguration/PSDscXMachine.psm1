@@ -1,4 +1,4 @@
-# internal functions for WaitForX
+﻿# internal functions for WaitForX
 
 # Fallback message strings in en-US
 DATA localizedData

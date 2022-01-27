@@ -1,4 +1,4 @@
-###########################################################
+﻿###########################################################
 #
 #  'PSDesiredStateConfiguration' logic module
 #
@@ -1925,8 +1925,8 @@ function Configuration
         }
         $moduleInfos = Get-Module -ListAvailable -FullyQualifiedName $moduleToImport | sort -Property Version -Descending
 
-        # Import-DscResource matches exact version of the module if �ModuleVersion� is specified.
-        # This is intentional, ModuleVersion keyword doesn�t refer to the latest version in Import-DscResource.
+        # Import-DscResource matches exact version of the module if ï¿½ModuleVersionï¿½ is specified.
+        # This is intentional, ModuleVersion keyword doesnï¿½t refer to the latest version in Import-DscResource.
         # Find the module that matches specified version.
         $modules = New-Object -TypeName System.Collections.ObjectModel.Collection[System.Management.Automation.PSModuleInfo]
         if (($moduleInfos.Count -gt 0) -and ($moduleToImport.Version -or $moduleToImport.Guid))
@@ -3213,7 +3213,7 @@ function ValidateNoNameNodeResources
                         if(-not $expandedDependsOn)
                         {
                             # When Node name is not specified in the configuration, $NoNameNodesResources & $NodeResources list are same.
-                            # Do not throw error here to avoid duplicate errors, these errors will be throw by �ValidateNodeResources� when $NodeResources list will be validated. 
+                            # Do not throw error here to avoid duplicate errors, these errors will be throw by ï¿½ValidateNodeResourcesï¿½ when $NodeResources list will be validated. 
                             if(-not $Script:NodeResources.ContainsKey($resourceId))
                             {
                                 $errorMessage = $LocalizedData.RequiredResourceNotFound -f @($requiredResource, $resourceId)

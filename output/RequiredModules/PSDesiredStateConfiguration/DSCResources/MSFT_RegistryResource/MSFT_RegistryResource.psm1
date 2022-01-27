@@ -1,4 +1,4 @@
-# This PS module contains functions for Desired State Configuration (DSC) Registry provider. It enables querying, creation, removal and update of Windows registry keys through Get, Set and Test operations on DSC managed nodes.
+﻿# This PS module contains functions for Desired State Configuration (DSC) Registry provider. It enables querying, creation, removal and update of Windows registry keys through Get, Set and Test operations on DSC managed nodes.
 
 # Fallback message strings in en-US
 DATA localizedData

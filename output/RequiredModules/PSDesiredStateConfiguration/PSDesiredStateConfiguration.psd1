@@ -1,7 +1,7 @@
-#
+﻿#
 # Module manifest for module 'PowerShellDSC'
 #
-# Copyright="© Microsoft Corporation. All rights reserved."
+# Copyright="Â© Microsoft Corporation. All rights reserved."
 #
 
 @{
@@ -14,7 +14,7 @@
 
     CompanyName          = 'Microsoft Corporation'
 
-    Copyright            = '© Microsoft Corporation. All rights reserved.'
+    Copyright            = 'Â© Microsoft Corporation. All rights reserved.'
 
     RequiredAssemblies   = @('Microsoft.Management.Infrastructure',
         'Microsoft.Windows.DSC.CoreConfProviders')

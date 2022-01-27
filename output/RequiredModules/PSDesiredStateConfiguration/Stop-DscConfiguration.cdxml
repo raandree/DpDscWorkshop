@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 This CDXML exposes the method StopConfiguration in MSFT_DSCLocalConfigurationManager CIM class as a cmdlet. To use this cmdlet please run the following command
 at the PowerShell prompt:
 
@@ -22,7 +22,7 @@ at the PowerShell prompt:
             </CmdletOutputMetadata>
           </ReturnValue>
           <Parameters>
-            <Parameter ParameterName="Force">               
+            <Parameter ParameterName="Force">
               <Type PSType="System.Management.Automation.SwitchParameter"/>
               <CmdletParameterMetadata>
               </CmdletParameterMetadata>

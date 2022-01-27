@@ -1,4 +1,4 @@
-# This PS module contains functions for Desired State Configuration (DSC) "Environment" provider
+﻿# This PS module contains functions for Desired State Configuration (DSC) "Environment" provider
 
 # Fallback message strings in en-US
 DATA localizedData

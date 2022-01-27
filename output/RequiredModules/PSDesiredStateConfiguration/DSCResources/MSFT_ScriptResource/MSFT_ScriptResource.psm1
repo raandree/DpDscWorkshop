@@ -1,4 +1,4 @@
-
+﻿
 data LocalizedData
 {
     # culture="en-US"

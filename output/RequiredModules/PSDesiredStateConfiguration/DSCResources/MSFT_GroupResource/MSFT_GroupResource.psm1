@@ -1,4 +1,4 @@
-<#
+﻿<#
 Implementatation notes
 
 Managing Disposable objects
