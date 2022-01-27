@@ -9,6 +9,7 @@ ServiceType: WebServerService
 OfficeOnlineServerFarmConfig:
   AllowHttp: true
   InternalUrl: http://contoso.com
+  DependsOn: '[OfficeOnlineServerInstallLanguagePack]de-de::[OfficeOnlineServerSetup]OfficeOnlineServerSetup'
 
 PSDscAllowPlainTextPassword: True
 PSDscAllowDomainUser: True
