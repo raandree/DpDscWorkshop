@@ -18,7 +18,6 @@ xEnvironment [String] #ResourceName
 }
 #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     foreach ($variable in $Variables)

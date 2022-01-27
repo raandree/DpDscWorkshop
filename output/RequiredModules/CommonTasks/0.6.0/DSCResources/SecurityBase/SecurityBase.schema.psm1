@@ -6,7 +6,6 @@ configuration SecurityBase {
         $Role
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDsc
     Import-DscResource -ModuleName SecurityPolicyDsc

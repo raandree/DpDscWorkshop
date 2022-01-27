@@ -17,7 +17,6 @@ configuration DnsServerLegacySettings {
         $NoForwarderRecursion
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DnsServerDsc
 
     if ($PSBoundParameters.ContainsKey('InstanceName'))

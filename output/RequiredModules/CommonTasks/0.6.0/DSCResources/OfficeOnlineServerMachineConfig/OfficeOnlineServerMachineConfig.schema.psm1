@@ -17,7 +17,6 @@ configuration OfficeOnlineServerMachineConfig
         $MachineToJoin
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName OfficeOnlineServerDsc
 
     $param = $PSBoundParameters

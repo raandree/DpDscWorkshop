@@ -265,7 +265,6 @@ configuration DnsServerSettings {
         $ZoneWritebackInterval
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DnsServerDsc
 
     if ($PSBoundParameters.ContainsKey('InstanceName'))

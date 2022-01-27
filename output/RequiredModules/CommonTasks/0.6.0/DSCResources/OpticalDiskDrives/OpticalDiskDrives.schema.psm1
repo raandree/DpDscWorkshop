@@ -7,7 +7,6 @@ configuration OpticalDiskDrives
         $Drives
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName StorageDsc
 
     foreach ($drive in $Drives)

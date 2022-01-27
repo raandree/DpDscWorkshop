@@ -18,7 +18,6 @@ configuration SharePointManagedAccounts
     [Schedule = [string]]
 #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName SharePointDSC
 
     foreach ($item in $ManagedAccounts)

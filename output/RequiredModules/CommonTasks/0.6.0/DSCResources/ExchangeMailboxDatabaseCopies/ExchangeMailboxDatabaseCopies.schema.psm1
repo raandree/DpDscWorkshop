@@ -20,7 +20,6 @@ configuration ExchangeMailboxDatabaseCopies {
     [TruncationLagTime = [string]]
     #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -Module xExchange
 
     foreach ($item in $Items)

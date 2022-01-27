@@ -49,7 +49,6 @@ configuration AddsDomain
         $EnablePrivilegedAccessManagement = $false
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
     WindowsFeature ADDS

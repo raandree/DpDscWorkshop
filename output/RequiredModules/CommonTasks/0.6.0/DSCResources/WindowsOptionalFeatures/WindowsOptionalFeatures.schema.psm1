@@ -13,7 +13,6 @@ configuration WindowsOptionalFeatures {
         $NoWindowsUpdateCheck = $false
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     foreach ($n in $Name)
     {

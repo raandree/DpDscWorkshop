@@ -10,7 +10,6 @@ configuration WebBrowser
         $Edge
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName GPRegistryPolicyDsc
 
 

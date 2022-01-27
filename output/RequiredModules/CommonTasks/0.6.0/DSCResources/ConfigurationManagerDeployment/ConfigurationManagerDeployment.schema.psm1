@@ -73,7 +73,6 @@ Configuration ConfigurationManagerDeployment
         $MdtInstallPath = 'C:\Apps\MDT'
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ConfigMgrCBDsc
     Import-DscResource -ModuleName UpdateServicesDsc
 

@@ -33,7 +33,6 @@ configuration RestartSystem
         $SkipCcmClientSDK = $true
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDsc
 
     if ($PendingReboot -eq $true)

@@ -7,7 +7,6 @@ configuration AddsServicePrincipalNames
         $ServicePrincipalNames
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
 

@@ -22,7 +22,6 @@ configuration DscPullServer
         $UseSecurityBestPractices = $false
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DSCResource -ModuleName xPSDesiredStateConfiguration
 
     xDscWebService PSDSCPullServer

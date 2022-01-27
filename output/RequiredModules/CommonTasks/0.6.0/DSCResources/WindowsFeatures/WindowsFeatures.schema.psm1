@@ -5,8 +5,6 @@ configuration WindowsFeatures {
         $Names
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-
     foreach ($n in $Names)
     {
         $ensure = 'Present'

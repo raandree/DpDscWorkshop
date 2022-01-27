@@ -58,7 +58,6 @@ configuration SharePointPrereq
         $ProductKey
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName SharePointDSC
     Import-DscResource -ModuleName storageDsc
 

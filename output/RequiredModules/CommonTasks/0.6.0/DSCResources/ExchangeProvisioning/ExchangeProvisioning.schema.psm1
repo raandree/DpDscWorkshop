@@ -30,7 +30,6 @@ configuration ExchangeProvisioning {
         [string]$IsoDriveLetter
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xExchange
     Import-DscResource -ModuleName ComputerManagementDsc
     Import-DscResource -ModuleName StorageDsc

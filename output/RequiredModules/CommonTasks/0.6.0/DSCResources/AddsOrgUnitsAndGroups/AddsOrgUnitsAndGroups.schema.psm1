@@ -15,7 +15,6 @@ configuration AddsOrgUnitsAndGroups
         $Groups
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
     # convert DN to Fqdn

@@ -7,7 +7,6 @@ configuration HostsFileEntries
         $Entries
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName NetworkingDsc
 
     foreach ($entry in $Entries)

@@ -21,7 +21,6 @@ configuration DhcpServerOptionDefinitions
 #>
 
     Import-DscResource -ModuleName xDhcpServer
-    Import-DscResource -ModuleName PsDesiredStateConfiguration
 
     foreach ($serverOptionDefinition in $ServerOptionDefinitions)
     {

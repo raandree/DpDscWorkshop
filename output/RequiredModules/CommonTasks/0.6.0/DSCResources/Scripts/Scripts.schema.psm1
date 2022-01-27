@@ -5,7 +5,6 @@ configuration Scripts {
         $Items
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     foreach ($item in $Items)

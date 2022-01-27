@@ -11,7 +11,6 @@ configuration DnsServerAdZones
         $DomainCredential
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DnsServerDsc
 
     foreach ($adZone in $AdZones)

@@ -204,7 +204,6 @@ configuration OfficeOnlineServerFarmConfig
         $PicturePasteDisabled
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName OfficeOnlineServerDsc
 
     if (-not $ExternalUrl -and -not $InternalUrl)

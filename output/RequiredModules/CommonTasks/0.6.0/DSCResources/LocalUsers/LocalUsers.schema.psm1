@@ -5,7 +5,6 @@ configuration LocalUsers {
         $Users
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     function AddMemberOf

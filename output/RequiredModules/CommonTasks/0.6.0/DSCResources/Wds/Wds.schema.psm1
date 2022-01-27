@@ -60,7 +60,6 @@ configuration Wds
         $DeviceReservations
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName WdsDsc
     Import-DscResource -ModuleName xDhcpServer
 

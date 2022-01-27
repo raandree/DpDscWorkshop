@@ -20,7 +20,6 @@ configuration DhcpScopeOptions
 #>
 
     Import-DscResource -ModuleName xDhcpServer
-    Import-DscResource -ModuleName PsDesiredStateConfiguration
 
     foreach ($scopeOption in $ScopeOptions)
     {

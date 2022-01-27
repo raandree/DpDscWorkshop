@@ -20,7 +20,6 @@ configuration NetworkIpConfiguration {
         $Routes
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName NetworkingDsc
 

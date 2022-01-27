@@ -19,7 +19,6 @@ configuration MmaAgent
         $ProxyCredential
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName MmaDsc
 
     if ($PSBoundParameters.ContainsKey('InstanceName'))

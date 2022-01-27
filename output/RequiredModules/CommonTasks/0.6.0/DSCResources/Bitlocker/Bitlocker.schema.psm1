@@ -15,7 +15,6 @@ configuration Bitlocker
         $AutoDisks
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xBitlocker
 
     # First install the required Bitlocker features

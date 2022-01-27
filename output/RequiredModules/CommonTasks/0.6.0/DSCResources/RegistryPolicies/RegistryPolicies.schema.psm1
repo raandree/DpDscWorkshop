@@ -9,7 +9,6 @@ configuration RegistryPolicies {
         $GpUpdateInterval = 20
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName GPRegistryPolicyDsc
 
     [string]$executionName = $null

@@ -44,7 +44,6 @@ configuration ExchangeMailboxDatabases {
     [SkipInitialDatabaseMount = [bool]]
     #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -Module xExchange
 
     foreach ($item in $Items)

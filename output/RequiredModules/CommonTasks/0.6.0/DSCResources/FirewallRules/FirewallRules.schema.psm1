@@ -4,7 +4,6 @@ configuration FirewallRules {
         [hashtable[]]$Rules
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName NetworkingDsc
 

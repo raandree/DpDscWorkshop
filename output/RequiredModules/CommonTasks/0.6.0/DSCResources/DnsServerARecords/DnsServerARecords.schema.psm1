@@ -7,7 +7,6 @@ configuration DnsServerARecords
         $Records
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DnsServerDsc
 
     [boolean]$dnsServerInstalled = $false

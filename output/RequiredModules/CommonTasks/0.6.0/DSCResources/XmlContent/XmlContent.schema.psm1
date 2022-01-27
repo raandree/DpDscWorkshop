@@ -5,7 +5,6 @@ configuration XmlContent {
         $XmlData
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName XmlContentDsc
 
     foreach ($xmlRecord in $XmlData)

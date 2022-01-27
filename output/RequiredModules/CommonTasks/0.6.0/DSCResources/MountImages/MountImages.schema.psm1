@@ -7,7 +7,6 @@ configuration MountImages
         $Images
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName StorageDsc
 
     foreach ($img in $Images)

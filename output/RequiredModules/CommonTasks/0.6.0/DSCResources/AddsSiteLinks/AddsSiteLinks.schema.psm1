@@ -7,7 +7,6 @@ configuration AddsSiteLinks
         $SiteLinks
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
     foreach ($siteLink in $SiteLinks)

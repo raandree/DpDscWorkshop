@@ -4,7 +4,6 @@ configuration DscLcmMaintenanceWindows {
         [hashtable[]]$MaintenanceWindows
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     $on = '1st', '2nd', '3rd', '4th', 'last'

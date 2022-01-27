@@ -12,7 +12,6 @@ configuration Network {
         $InterfaceAlias = 'Ethernet'
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName NetworkingDsc
 

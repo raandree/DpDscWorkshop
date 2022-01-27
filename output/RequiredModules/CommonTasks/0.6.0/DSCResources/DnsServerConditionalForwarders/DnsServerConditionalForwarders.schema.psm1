@@ -7,7 +7,6 @@ configuration DnsServerConditionalForwarders
         $ConditionalForwarders
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DnsServerDsc
 
     foreach ($conditionalForwarder in $ConditionalForwarders)

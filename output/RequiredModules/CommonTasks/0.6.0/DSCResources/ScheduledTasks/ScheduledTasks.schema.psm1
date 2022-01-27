@@ -7,7 +7,6 @@ configuration ScheduledTasks
         $Tasks
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDsc
 
     foreach ($task in $Tasks)

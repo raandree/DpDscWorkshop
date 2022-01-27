@@ -19,7 +19,6 @@ configuration WindowsEventForwarding
         $Subscriptions
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xWindowsEventForwarding
 
     if ( $NodeType -eq 'Collector' )

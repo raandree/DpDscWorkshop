@@ -52,7 +52,6 @@ configuration Cluster
         $OrganizationalUnitDn
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xFailoverCluster
     Import-DscResource -ModuleName ActiveDirectoryDsc
 
