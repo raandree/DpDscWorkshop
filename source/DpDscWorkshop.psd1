@@ -1,5 +1,5 @@
 @{
-    RootModule        = 'DscWorkshop.psm1'
+    RootModule        = 'DpDscWorkshop.psm1'
     ModuleVersion     = '0.4'
     GUID              = '63e8bf79-62d3-4249-8fe6-9a766fbe8481'
     Author            = 'DSC Community'

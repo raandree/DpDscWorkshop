@@ -23,10 +23,6 @@ param
     $AcceptanceTestDirectory = (property AcceptanceTestDirectory 'Acceptance'),
 
     [Parameter()]
-    [string]
-    $BuildAcceptanceTestResults = (property BuildAcceptanceTestResults 'BuildAcceptanceTestResults.xml'),
-
-    [Parameter()]
     [string[]]
     $excludeTag = (property excludeTag @()),
 
@@ -55,28 +51,11 @@ task TestBuildAcceptance {
             Get-SamplerAbsolutePath -Path $_ -RelativeTo $PesterScript[0]
         })
 
-    if (-not (Test-Path -Path $AcceptanceTestDirectory))
-    {
-        Write-Build Yellow "Path for tests '$AcceptanceTestDirectory' does not exist"
-        return
-    }
+    $testResultsPath = Get-SamplerAbsolutePath -Path AcceptanceTestResults.xml -RelativeTo $OutputDirectory
 
-    if (-not ([System.IO.Path]::IsPathRooted($BuildOutput)))
-    {
-        $BuildOutput = Join-Path -Path $PSScriptRoot -ChildPath $BuildOutput
-    }
-
-    if ($env:BHBuildSystem -in 'AppVeyor', 'Unknown')
-    {
-        #AppVoyor build are  not deploying to a pull server yet.
-        $excludeTag = 'PullServer'
-    }
-
-    $testResultsPath = Get-SamplerAbsolutePath -Path $testResultsPath -RelativeTo $OutputDirectory
-
-    Write-Build DarkGray "testResultsPath is: $testResultsPath"
+    Write-Build DarkGray "TestResultsPath is: $testResultsPath"
     Write-Build DarkGray "AcceptanceTestDirectory is: $AcceptanceTestDirectory"
-    Write-Build DarkGray "BuildOutput is: $BuildOutput"
+    Write-Build DarkGray "BuildOutput is: $OutputDirectory"
 
     Import-Module -Name Pester
     $po = $po = New-PesterConfiguration

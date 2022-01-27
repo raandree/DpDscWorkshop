@@ -49,6 +49,14 @@ stages:
               filePath: './build.ps1'
               arguments: '-ResolveDependency -tasks pack'
 
+          - task: PublishTestResults@2
+            displayName: 'Publish Test Results'
+            inputs:
+              testResultsFormat: 'NUnit'
+              testResultsFiles: '$(buildFolderName)/$(testResultFolderName)/NUnit*.xml'
+              testRunTitle: 'Unit (Windows Server 2016)'
+            condition: succeededOrFailed()
+
           - task: PublishPipelineArtifact@1
             displayName: 'Publish Output Folder'
             inputs:
