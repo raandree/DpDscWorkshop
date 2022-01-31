@@ -1,9 +1,0 @@
-﻿#pragma namespace("\\\\.\\root\\microsoft\\windows\\DesiredStateConfiguration")
-instance of __namespace{ name="ms_409";};
-#pragma namespace("\\\\.\\root\\microsoft\\windows\\DesiredStateConfiguration\\ms_409")
-
-[Description("This resource is used to install, uninstall and query for roles or features on the DSC managed node.") : Amended,AMENDMENT, LOCALE(0x0409)] 
-class MSFT_RoleResource : OMI_BaseResource
-{
-};
-
