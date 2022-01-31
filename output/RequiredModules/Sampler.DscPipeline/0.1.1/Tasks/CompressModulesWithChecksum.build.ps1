@@ -35,6 +35,8 @@ param
 task CompressModulesWithChecksum {
     . Set-SamplerTaskVariable -AsNewBuild
 
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+
     $CompressedModulesFolder = Get-SamplerAbsolutePath -Path $CompressedModulesFolder -RelativeTo $OutputDirectory
     $RequiredModulesDirectory = Get-SamplerAbsolutePath -Path $RequiredModulesDirectory -RelativeTo $OutputDirectory
 
