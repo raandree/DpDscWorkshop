@@ -8,6 +8,7 @@ ServiceType: WebServerService
 
 OfficeOnlineServerMachineConfig:
   MachineToJoin: OSS001
+  DependsOn: '[OfficeOnlineServerSetup]OfficeOnlineServerSetup'
 
 PSDscAllowPlainTextPassword: True
 PSDscAllowDomainUser: True
