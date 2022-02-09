@@ -1,0 +1,3 @@
+TestPath: C:\OfficeOnline\SetupForTest.exe
+StagePath: C:\OfficeOnline\SetupForStage.exe
+ProdPath: C:\OfficeOnline\SetupForProd.exe

@@ -3,7 +3,8 @@ Configurations:
   - OfficeOnlineServerFarmConfig
 
 OfficeOnlineServerSetup:
-  Path: C:\OfficeOnline\Setup.exe
+  #Path: C:\OfficeOnline\Setup.exe
+  Path: '[x= { $Datum.Global.SharePointSettings."$($Node.Environment)Path" } =]'
   LanguagePacks:
     - Language: de-de
       BinaryDir: C:\de-de
