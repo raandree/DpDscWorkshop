@@ -1,0 +1,24 @@
+NodeName: OSS006
+Environment: Stage
+Role: OfficeOnlinePrimary
+Description: OfficeOnline Server in Test
+Location: DataCenterIntranet
+ServiceTypeDeviation: WebServerServiceOfficeOnline
+ServiceType: WebServerService
+
+OfficeOnlineServerFarmConfig:
+  AllowHttp: true
+  InternalUrl: http://contoso.com
+  DependsOn: '[OfficeOnlineServerSetup]OfficeOnlineServerSetup'
+
+PSDscAllowPlainTextPassword: True
+PSDscAllowDomainUser: True
+
+LcmConfig:
+  ConfigurationRepositoryWeb:
+    Server:
+      ConfigurationNames: '[x= { $Node.NodeName } =]'
+
+DscTagging:
+  Layers:
+    - '[x= { Get-RelativeFileName -Path $File } =]'
