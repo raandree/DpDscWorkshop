@@ -8,48 +8,48 @@ function Get-DatumNodesRecursive
     (
         [Parameter()]
         [object]
-        $AllDatumNodes = (Get-variable -Name Datum -ValueOnly).AllNodes
+        $AllDatumNodes = (Get-Variable -Name Datum -ValueOnly).AllNodes
     )
 
     $datumContainers = [System.Collections.Queue]::new()
 
     Write-Verbose -Message "Inspecting [$($AllDatumNodes.PSObject.Properties.Where({$_.MemberType -eq 'ScriptProperty'}).Name -join ', ')]"
-    $AllDatumNodes.PSObject.Properties.Where({$_.MemberType -eq 'ScriptProperty'}).ForEach({
-        Write-Verbose -Message "Working on '$($_.Name)'."
-        $val = $_.Value | Add-Member -MemberType NoteProperty -Name Name -Value $_.Name -PassThru -ErrorAction Ignore -Force
-        if ($val -is [FileProvider])
-        {
-            Write-Verbose -Message "Adding '$($val.Name)' to the queue."
-            $datumContainers.Enqueue($val)
-        }
-        else
-        {
-            Write-Verbose -Message "Adding Node '$($_.Name)'."
-            $val['Name'] = $_.Name
-            $val
-        }
-    })
+    $AllDatumNodes.PSObject.Properties.Where({ $_.MemberType -eq 'ScriptProperty' }).ForEach({
+            Write-Verbose -Message "Working on '$($_.Name)'."
+            $val = $_.Value | Add-Member -MemberType NoteProperty -Name Name -Value $_.Name -PassThru -ErrorAction Ignore -Force
+            if ($val -is [FileProvider])
+            {
+                Write-Verbose -Message "Adding '$($val.Name)' to the queue."
+                $datumContainers.Enqueue($val)
+            }
+            else
+            {
+                Write-Verbose -Message "Adding Node '$($_.Name)'."
+                $val['Name'] = $_.Name
+                $val
+            }
+        })
 
     while ($datumContainers.Count -gt 0)
     {
         $currentContainer = $datumContainers.Dequeue()
         Write-Debug -Message "Working on Container '$($currentContainer.Name)'."
 
-        $currentContainer.PSObject.Properties.Where({$_.MemberType -eq 'ScriptProperty'}).ForEach({
-            $val = $currentContainer.($_.Name)
-            $val | Add-Member -MemberType NoteProperty -Name Name -Value $_.Name -ErrorAction Ignore
-            if ($val -is [FileProvider])
-            {
-                Write-Verbose -Message "Found Container '$($_.Name).'"
-                $datumContainers.Enqueue($val)
-            }
-            else
-            {
-                Write-Verbose -Message "Found Node '$($_.Name)'."
-                $val['Name'] = $_.Name
-                $val
-            }
-        })
+        $currentContainer.PSObject.Properties.Where({ $_.MemberType -eq 'ScriptProperty' }).ForEach({
+                $val = $currentContainer.($_.Name)
+                $val | Add-Member -MemberType NoteProperty -Name Name -Value $_.Name -ErrorAction Ignore
+                if ($val -is [FileProvider])
+                {
+                    Write-Verbose -Message "Found Container '$($_.Name).'"
+                    $datumContainers.Enqueue($val)
+                }
+                else
+                {
+                    Write-Verbose -Message "Found Node '$($_.Name)'."
+                    $val['Name'] = $_.Name
+                    $val
+                }
+            })
     }
 }
 #EndRegion '.\Public\Get-DatumNodesRecursive.ps1' 54
@@ -65,17 +65,20 @@ function Get-DscErrorMessage
 
     switch ($Exception)
     {
-        { $_ -is [System.Management.Automation.ItemNotFoundException] } {
+        { $_ -is [System.Management.Automation.ItemNotFoundException] }
+        {
             #can be ignored, very likely caused by Get-Item within the PSDesiredStateConfiguration module
             break
         }
 
-        { $_.Message -match "Unable to find repository 'PSGallery" } {
+        { $_.Message -match "Unable to find repository 'PSGallery" }
+        {
             'Error in Package Management'
             break
         }
 
-        { $_.Message -match 'A second CIM class definition'} {
+        { $_.Message -match 'A second CIM class definition' }
+        {
             # This happens when several versions of same module are available.
             # Mainly a problem when when $Env:PSModulePath is polluted or
             # DscResources or DSC_Configuration are not clean
@@ -83,12 +86,14 @@ function Get-DscErrorMessage
             break
         }
 
-        { $_ -is [System.Management.Automation.ParentContainsErrorRecordException]} {
+        { $_ -is [System.Management.Automation.ParentContainsErrorRecordException] }
+        {
             "Compilation Error: $_.Message"
             break
         }
 
-        { $_.Message -match ([regex]::Escape("Cannot find path 'HKLM:\SOFTWARE\Microsoft\Powershell\3\DSC'")) } {
+        { $_.Message -match ([regex]::Escape("Cannot find path 'HKLM:\SOFTWARE\Microsoft\Powershell\3\DSC'")) }
+        {
             if ($_.InvocationInfo.PositionMessage -match 'PSDscAllowDomainUser')
             {
                 # This tend to be repeated for all nodes even if only 1 is affected
@@ -108,7 +113,7 @@ function Get-DscErrorMessage
         }
     }
 }
-#EndRegion '.\Public\Get-DscErrorMessage.ps1' 55
+#EndRegion '.\Public\Get-DscErrorMessage.ps1' 60
 #Region '.\Public\Get-DscMofEnvironment.ps1' 0
 
 function Get-DscMofEnvironment
@@ -219,7 +224,7 @@ function Get-FilteredConfigurationData
 
         [Parameter()]
         [Object]
-        $Datum = $(Get-variable Datum -ValueOnly -ErrorAction Stop)
+        $Datum = $(Get-Variable Datum -ValueOnly -ErrorAction Stop)
     )
 
     if ($null -eq $Filter)
@@ -250,7 +255,7 @@ function Get-FilteredConfigurationData
 
     return @{
         AllNodes = $allDatumNodes
-        Datum = $Datum
+        Datum    = $Datum
     }
 }
 #EndRegion '.\Public\Get-FilteredConfigurationData.ps1' 55
@@ -309,3 +314,4 @@ Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'tasks\*') -Includ
         Export-ModuleMember -Alias $taskFileAliasName
     }
 #EndRegion '.\suffix.ps1' 11
+

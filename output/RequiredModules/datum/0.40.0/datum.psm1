@@ -838,6 +838,20 @@ function Merge-Hashtable
     return $clonedReference
 }
 #EndRegion '.\Private\Merge-Hashtable.ps1' 166
+#Region '.\Public\Clear-DatumCache.ps1' 0
+function Clear-DatumCache
+{
+    [CmdletBinding()]
+
+    param ()
+
+    if ($rsopCache)
+    {
+        $rsopCache.Clear()
+        Write-Debug -Message 'RSOP Cache cleared'
+    }
+}
+#EndRegion '.\Public\Clear-DatumCache.ps1' 9
 #Region '.\Public\ConvertTo-Datum.ps1' 0
 function ConvertTo-Datum
 {
@@ -1972,15 +1986,3 @@ function Test-TestHandlerFilter
     $InputObject -is [string] -and $InputObject -match '^\[TEST=[\w\W]*\]$'
 }
 #EndRegion '.\Public\Test-TestHandlerFilter.ps1' 12
-
-function Clear-DatumCache
-{
-    [CmdletBinding()]
-
-    param ()
-
-    if ($rsopCache)
-    {
-        $rsopCache.Clear()
-    }
-}

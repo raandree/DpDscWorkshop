@@ -1,10 +1,10 @@
-@{
+﻿@{
 
     # Script module or binary module file associated with this manifest.
     RootModule        = 'Sampler.DscPipeline.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1.1'
+    ModuleVersion     = '0.2.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -91,7 +91,7 @@
         PSData = @{
 
             # Prerelease string of this module
-            Prerelease = 'preview0004'
+            Prerelease = 'fornewdatum0001'
 
             # Tags applied to this module. These help with module discovery in online galleries.
             Tags = @('DSC', 'Sampler', 'InvokeBuild', 'Tasks')
@@ -106,17 +106,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            ReleaseNotes = '## [0.1.1-preview0004] - 2022-01-11
-
-### Added
-
-- Adding pipeline tasks and commands from DSC Workshop.
-- Small changes to support easier deployment for individual environments.
-- Added scripts for compiling MOF and Meta MOF files without the need for the `rootConfig.ps1` script. It is now a self-contained task that takes parameters from the `Build.yml`.
-- Having modules available more than once results in: ImportCimAndScriptKeywordsFromModule : "A second CIM class definition
-  for ''MSFT_PSRepository'' was found while processing the schema file". Fixed that by using function ''Get-DscResourceFromModuleInFolder''.
-  This usually happens with ''PackageManagement'' and ''PowerShellGet''
-'
+            ReleaseNotes = ''
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             # RequireLicenseAcceptance = $false
