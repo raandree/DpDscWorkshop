@@ -20,7 +20,7 @@ param
 
     [Parameter()]
     [System.Object[]]
-    $AcceptanceTestDirectory = (property AcceptanceTestDirectory 'Acceptance'),
+    $AcceptanceDataPesterScript = (property AcceptanceTestDirectory 'Acceptance'),
 
     [Parameter()]
     [string[]]
@@ -41,26 +41,41 @@ param
 )
 
 task TestBuildAcceptance {
-    $OutputDirectory = Get-SamplerAbsolutePath -Path $OutputDirectory -RelativeTo $ProjectPath
+    $PesterOutputFolder = Get-SamplerAbsolutePath -Path $PesterOutputFolder -RelativeTo $OutputDirectory
+    "`tPester Output Folder    = '$PesterOutputFolder"
+    if (-not (Test-Path -Path $PesterOutputFolder))
+    {
+        Write-Build -Color 'Yellow' -Text "Creating folder $PesterOutputFolder"
+
+        $null = New-Item -Path $PesterOutputFolder -ItemType 'Directory' -Force -ErrorAction 'Stop'
+    }
+
     $DatumConfigDataDirectory = Get-SamplerAbsolutePath -Path $DatumConfigDataDirectory -RelativeTo $ProjectPath
     $PesterScript = $PesterScript.Foreach({
             Get-SamplerAbsolutePath -Path $_ -RelativeTo $ProjectPath
         })
 
-    $AcceptanceTestDirectory = $AcceptanceTestDirectory.Foreach({
+    $AcceptanceDataPesterScript = $AcceptanceTestDirectory.Foreach({
             Get-SamplerAbsolutePath -Path $_ -RelativeTo $PesterScript[0]
         })
 
-    $testResultsPath = Get-SamplerAbsolutePath -Path AcceptanceTestResults.xml -RelativeTo $OutputDirectory
+    Write-Build Green "Acceptance Data Pester Scripts = [$($AcceptanceDataPesterScript -join ';')]"
+
+    if (-not (Test-Path -Path $AcceptanceDataPesterScript))
+    {
+        Write-Build Yellow "Path for tests '$AcceptanceDataPesterScript' does not exist"
+        return
+    }
+
+    $testResultsPath = Get-SamplerAbsolutePath -Path AcceptanceTestResults.xml -RelativeTo $PesterOutputFolder
 
     Write-Build DarkGray "TestResultsPath is: $testResultsPath"
-    Write-Build DarkGray "AcceptanceTestDirectory is: $AcceptanceTestDirectory"
     Write-Build DarkGray "BuildOutput is: $OutputDirectory"
 
     Import-Module -Name Pester
     $po = $po = New-PesterConfiguration
     $po.Run.PassThru = $true
-    $po.Run.Path = [string[]]$AcceptanceTestDirectory
+    $po.Run.Path = [string[]]$AcceptanceDataPesterScript
     $po.Output.Verbosity = 'Detailed'
     if ($excludeTag)
     {

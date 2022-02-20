@@ -42,7 +42,7 @@ param
 
 task TestConfigData {
 
-    $isWrongPesterVersion = (Get-Module -Name 'Pester').Version -lt [System.Version] '5.0.0'
+    $isWrongPesterVersion = (Get-Module -Name 'Pester' -ListAvailable | Select-Object -First 1).Version -lt [System.Version] '5.0.0'
 
     # If the correct module is not imported, then exit.
     if ($isWrongPesterVersion)
@@ -52,7 +52,7 @@ task TestConfigData {
         return
     }
 
-    . Set-SamplerTaskVariable
+    . Set-SamplerTaskVariable -AsNewBuild
 
     $PesterOutputFolder = Get-SamplerAbsolutePath -Path $PesterOutputFolder -RelativeTo $OutputDirectory
     "`tPester Output Folder    = '$PesterOutputFolder"
@@ -63,24 +63,6 @@ task TestConfigData {
         $null = New-Item -Path $PesterOutputFolder -ItemType 'Directory' -Force -ErrorAction 'Stop'
     }
 
-    $osShortName = Get-OperatingSystemShortName
-
-    $powerShellVersion = 'PSv.{0}' -f $PSVersionTable.PSVersion
-
-    $getPesterOutputFileFileNameParameters = @{
-        ProjectName       = $ProjectName
-        ModuleVersion     = $ModuleVersion
-        OsShortName       = $osShortName
-        PowerShellVersion = $powerShellVersion
-    }
-
-    $pesterOutputFileFileName = Get-PesterOutputFileFileName @getPesterOutputFileFileNameParameters
-
-    $pesterOutputFullPath = Get-SamplerAbsolutePath -Path "$($PesterOutputFormat)_$pesterOutputFileFileName" -RelativeTo $PesterOutputFolder
-
-
-
-    $OutputDirectory = Get-SamplerAbsolutePath -Path $OutputDirectory -RelativeTo $ProjectPath
     $PesterScript = $PesterScript.Foreach( {
             Get-SamplerAbsolutePath -Path $_ -RelativeTo $ProjectPath
         })
@@ -97,10 +79,10 @@ task TestConfigData {
         return
     }
 
-    $testResultsPath = Get-SamplerAbsolutePath -Path IntegrationTestResults.xml -RelativeTo $OutputDirectory
+    $testResultsPath = Get-SamplerAbsolutePath -Path IntegrationTestResults.xml -RelativeTo $PesterOutputFolder
 
     Write-Build DarkGray "TestResultsPath is: $TestResultsPath"
-    Write-Build DarkGray "OutputDirectory is: $OutputDirectory"
+    Write-Build DarkGray "OutputDirectory is: $PesterOutputFolder"
 
     Import-Module -Name Pester
     $po = New-PesterConfiguration
