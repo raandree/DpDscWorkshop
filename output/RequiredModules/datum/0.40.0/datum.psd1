@@ -24,7 +24,7 @@
         './ScriptsToProcess/Resolve-NodeProperty.ps1'
     )
 
-    FunctionsToExport = @('Clear-DatumCache','ConvertTo-Datum','Get-DatumRsop','Get-FileProviderData','Get-MergeStrategyFromPath','Get-RelativeFileName','Invoke-TestHandlerAction','Merge-Datum','New-DatumFileProvider','New-DatumStructure','Resolve-Datum','Resolve-DatumPath','Test-TestHandlerFilter')
+    FunctionsToExport = @('Clear-DatumRsopCache','ConvertTo-Datum','Get-DatumRsop','Get-DatumRsopCache','Get-FileProviderData','Get-MergeStrategyFromPath','Get-RelativeFileName','Invoke-TestHandlerAction','Merge-Datum','New-DatumFileProvider','New-DatumStructure','Resolve-Datum','Resolve-DatumPath','Test-TestHandlerFilter')
 
     AliasesToExport   = ''
 
@@ -40,7 +40,7 @@
 
             ReleaseNotes = ''
 
-            Prerelease   = 'newdatumhandlerh0001'
+            Prerelease   = ''
 
         }
     }

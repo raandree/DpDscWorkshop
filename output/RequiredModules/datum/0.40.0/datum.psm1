@@ -237,7 +237,7 @@ function Expand-RsopHashtable
     elseif ($InputObject -is [pscredential])
     {
         $cred = $InputObject.GetNetworkCredential()
-        $cred = "$($cred.UserName)@$($cred.Domain)$(if($cred.Domain){':'})$($cred.Password)" | Add-Member -Name __File -MemberType NoteProperty -Value $InputObject.__File -PassThru
+        $cred = "$($cred.UserName)@$($cred.Domain)$(if($cred.Domain){':'})$('*' * $cred.Password.Length)" | Add-Member -Name __File -MemberType NoteProperty -Value $InputObject.__File -PassThru
 
         Get-RsopValueString -InputString $cred -Key $key -Depth $depth -IsArrayValue:$IsArrayValue -NoSourceInformation:$NoSourceInformation
     }
@@ -488,16 +488,30 @@ function Invoke-DatumHandler
             }
             catch
             {
-                Write-Warning "Error using Datum Handler $Handler, the error was: '$($_.Exception.Message)'. Returning InputObject ($InputObject)."
-                $Result = $InputObject
-                return $false
+                $throwOnError = $true
+
+                if (Get-Item -Path Env:\DatumHandlerThrowsOnError -ErrorAction SilentlyContinue)
+                {
+                    [void][bool]::TryParse($env:DatumHandlerThrowsOnError, [ref]$throwOnError)
+                }
+
+                if ($throwOnError)
+                {
+                    Write-Error -ErrorRecord $_ -ErrorAction Stop
+                }
+                else
+                {
+                    Write-Warning "Error using Datum Handler $Handler, the error was: '$($_.Exception.Message)'. Returning InputObject ($InputObject)."
+                    $Result = $InputObject
+                    return $false
+                }
             }
         }
     }
 
     return $return
 }
-#EndRegion '.\Private\Invoke-DatumHandler.ps1' 75
+#EndRegion '.\Private\Invoke-DatumHandler.ps1' 85
 #Region '.\Private\Merge-DatumArray.ps1' 0
 function Merge-DatumArray
 {
@@ -838,20 +852,20 @@ function Merge-Hashtable
     return $clonedReference
 }
 #EndRegion '.\Private\Merge-Hashtable.ps1' 166
-#Region '.\Public\Clear-DatumCache.ps1' 0
-function Clear-DatumCache
+#Region '.\Public\Clear-DatumRsopCache.ps1' 0
+function Clear-DatumRsopCache
 {
     [CmdletBinding()]
 
     param ()
 
-    if ($rsopCache)
+    if ($rsopCache.Count)
     {
         $rsopCache.Clear()
-        Write-Debug -Message 'RSOP Cache cleared'
+        Write-Verbose -Message 'Datum RSOP Cache cleared'
     }
 }
-#EndRegion '.\Public\Clear-DatumCache.ps1' 9
+#EndRegion '.\Public\Clear-DatumRsopCache.ps1' 13
 #Region '.\Public\ConvertTo-Datum.ps1' 0
 function ConvertTo-Datum
 {
@@ -1067,6 +1081,23 @@ function Get-DatumRsop
     }
 }
 #EndRegion '.\Public\Get-DatumRsop.ps1' 97
+#Region '.\Public\Get-DatumRsopCache.ps1' 0
+function Get-DatumRsopCache
+{
+    [CmdletBinding()]
+
+    param ()
+
+    if ($rsopCache.Count)
+    {
+        $rsopCache
+    }
+    else
+    {
+        Write-Verbose 'The Datum RSOP Cache is empty.'
+    }
+}
+#EndRegion '.\Public\Get-DatumRsopCache.ps1' 16
 #Region '.\Public\Get-FileProviderData.ps1' 0
 function Get-FileProviderData
 {
