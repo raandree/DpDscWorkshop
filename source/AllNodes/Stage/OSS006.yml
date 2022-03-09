@@ -1,5 +1,5 @@
-NodeName: OSS001
-Environment: Test
+NodeName: OSS006
+Environment: Stage
 Role: OfficeOnlinePrimary
 Description: OfficeOnline Server in Test
 Location: DataCenterIntranet

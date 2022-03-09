@@ -1,0 +1,12 @@
+TestPath: C:\OfficeOnline\SetupForTest.exe
+StagePath: C:\OfficeOnline\SetupForStage.exe
+ProdPath: C:\OfficeOnline\SetupForProd.exe
+
+SharePointConfigurationData:
+  WebApplications:
+    Portal:
+      DefaultZoneFQDN: sp12p-portal.contoso.com
+      IntranetZoneFQDN: modern-portal.contoso.com
+    MySite:
+      DefaultZoneFQDN: sp12p-my-portal.contoso.com
+      IntranetZoneFQDN: modern-my-portal.contoso.com

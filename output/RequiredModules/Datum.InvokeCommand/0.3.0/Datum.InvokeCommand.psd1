@@ -30,24 +30,9 @@
 
             IconUri      = 'https://dsccommunity.org/images/DSC_Logo_300p.png'
 
-            Prerelease   = 'preview0001'
+            Prerelease   = 'preview0003'
 
-            ReleaseNotes = '## [0.3.0-preview0001] - 2022-01-17
-
-### Added
-
-- Support for expandable strings
-- Configurable Header and Footer
-- Content is now evaluated with RegEx + PowerShell Parser
-- Gives access to Node and Datum variable
-- Added function ''Get-RelativeNodeFileName''
-- Resolves nested references
-- Added analyzersettings rules
-- Added support for multi-line scriptblocks
-- Added more tests and test data for multi-role support and handler support in ''ResolutionPrecedence''
-- Improved error handling and implemented ''$env:DatumHandlerThrowsOnError''
-
-'
+            ReleaseNotes = ''
 
         }
 

@@ -11,20 +11,20 @@ param
     $OutputDirectory = (property OutputDirectory (Join-Path $BuildRoot 'output')),
 
     [Parameter()]
-    [System.String]
-    $PesterOutputFolder = (property PesterOutputFolder 'TestResults'),
-
-    [Parameter()]
-    [System.String]
-    $PesterOutputFormat = (property PesterOutputFormat ''),
+    [string]
+    $DatumConfigDataDirectory = (property DatumConfigDataDirectory 'source'),
 
     [Parameter()]
     [System.Object[]]
-    $PesterScript = (property PesterScript ''),
+    $PesterScript = (property PesterScript 'tests'),
 
     [Parameter()]
     [System.Object[]]
     $ConfigDataPesterScript = (property ConfigDataPesterScript 'ConfigData'),
+
+    [Parameter()]
+    [string]
+    $testResultsPath = (property TestResultsPath 'IntegrationTestResults.xml'),
 
     [Parameter()]
     [int]
@@ -41,28 +41,8 @@ param
 )
 
 task TestConfigData {
-
-    $isWrongPesterVersion = (Get-Module -Name 'Pester' -ListAvailable | Select-Object -First 1).Version -lt [System.Version] '5.0.0'
-
-    # If the correct module is not imported, then exit.
-    if ($isWrongPesterVersion)
-    {
-        "Pester 5 is not used in the pipeline, skipping task.`n"
-
-        return
-    }
-
-    . Set-SamplerTaskVariable -AsNewBuild
-
-    $PesterOutputFolder = Get-SamplerAbsolutePath -Path $PesterOutputFolder -RelativeTo $OutputDirectory
-    "`tPester Output Folder    = '$PesterOutputFolder"
-    if (-not (Test-Path -Path $PesterOutputFolder))
-    {
-        Write-Build -Color 'Yellow' -Text "Creating folder $PesterOutputFolder"
-
-        $null = New-Item -Path $PesterOutputFolder -ItemType 'Directory' -Force -ErrorAction 'Stop'
-    }
-
+    $OutputDirectory = Get-SamplerAbsolutePath -Path $OutputDirectory -RelativeTo $ProjectPath
+    $DatumConfigDataDirectory = Get-SamplerAbsolutePath -Path $DatumConfigDataDirectory -RelativeTo $ProjectPath
     $PesterScript = $PesterScript.Foreach( {
             Get-SamplerAbsolutePath -Path $_ -RelativeTo $ProjectPath
         })
@@ -79,18 +59,17 @@ task TestConfigData {
         return
     }
 
-    $testResultsPath = Get-SamplerAbsolutePath -Path IntegrationTestResults.xml -RelativeTo $PesterOutputFolder
+    $testResultsPath = Get-SamplerAbsolutePath -Path $testResultsPath -RelativeTo $OutputDirectory
 
-    Write-Build DarkGray "TestResultsPath is: $TestResultsPath"
-    Write-Build DarkGray "OutputDirectory is: $PesterOutputFolder"
+    Write-Build DarkGray "testResultsPath is: $testResultsPath"
+    Write-Build DarkGray "OutputDirectory is: $OutputDirectory"
 
     Import-Module -Name Pester
-    $po = New-PesterConfiguration
+    $po = [PesterConfiguration]::new()
     $po.Run.PassThru = $true
     $po.Run.Path = [string[]]$ConfigDataPesterScript
     $po.Output.Verbosity = 'Detailed'
     $po.Filter.Tag = 'Integration'
-    $po.TestResult.Enabled = $true
     $po.TestResult.OutputFormat = 'NUnitXml'
     $po.TestResult.OutputPath = $testResultsPath
     $testResults = Invoke-Pester -Configuration $po

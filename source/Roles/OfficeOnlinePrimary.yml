@@ -1,11 +1,28 @@
 Configurations:
   - OfficeOnlineServerSetup
   - OfficeOnlineServerFarmConfig
+  - RegistryValues
 
 OfficeOnlineServerSetup:
-  Path: C:\OfficeOnline\Setup.exe
+  #Path: C:\OfficeOnline\Setup.exe
+  Path: '[x= { $Datum.Global.SharePointSettings."$($Node.Environment)Path" } =]'
   LanguagePacks:
     - Language: de-de
       BinaryDir: C:\de-de
     - Language: en-us
       BinaryDir: C:\en-us
+
+RegistryValues:
+  Values:
+    - Key: 'HKLM:\System\CurrentControlSet\Control\Lsa\MSV1_0'
+      ValueName: 'BackConnectionHostNames'
+      ValueData:
+        - '[x= { $datum.Global.SharePointSettings.SharePointConfigurationData.WebApplications.Portal.DefaultZoneFQDN } =]'
+        - '[x= { $datum.Global.SharePointSettings.SharePointConfigurationData.WebApplications.MySite.DefaultZoneFQDN } =]'
+      ValueType: 'MultiString'
+      Force: true
+    - Key: 'HKLM:\System\CurrentControlSet\Control\Lsa\MSV1_0'
+      ValueName: 'BackConnectionHostNames1'
+      ValueData: '[x= { $datum.Global.SharePointSettings.SharePointConfigurationData.WebApplications.MySite.DefaultZoneFQDN } =]'
+      ValueType: 'MultiString'
+      Force: true
