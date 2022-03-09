@@ -20,79 +20,82 @@ stages:
   - stage: Build
     jobs:
       - job: Compile_Dsc
+        strategy:
+          parallel: 2
         displayName: 'Compile DSC Configuration'
         pool:
           vmImage: 'windows-2019'
         steps:
-
-          - task: GitVersion@5
+          - task: gitversion/setup@0
+            displayName: 'Install GitTools'
+            inputs:
+              versionSpec: '5.3.x'
+          - task: gitversion/execute@0
             name: gitVersion
             displayName: 'Evaluate Next Version'
             inputs:
-              runtime: 'core'
               configFilePath: 'GitVersion.yml'
 
           - task: PowerShell@2
-            name: build
-            displayName: 'Build DSC Artifacts'
+            name: displayEnvironmentVariables
+            displayName: 'Display Environment Variables'
             inputs:
-              filePath: './build.ps1'
-              arguments: '-ResolveDependency -tasks build'
-              pwsh: false
-            env:
-              ModuleVersion: $(gitVersion.NuGetVersionV2)
+              targetType: 'inline'
+              script: |
+                dir -Path env: | Out-String | Write-Host
 
           - task: PowerShell@2
-            name: pack
-            displayName: 'Pack DSC Artifacts'
+            displayName: 'Execute build.ps1'
             inputs:
-              filePath: './build.ps1'
-              arguments: '-ResolveDependency -tasks pack'
+              targetType: inline
+              script: |
+                $env:CurrentJobNumber = $env:SYSTEM_JOBPOSITIONINPHASE
+                $env:TotalJobCount = $env:SYSTEM_TOTALJOBSINPHASE
+                Write-Host "Calling 'Build.ps1' with parameter 'CurrentJobNumber' =  $($env:CurrentJobNumber) and 'TotalJobCount' = $($env:TotalJobCount)"
+                .\Build.ps1 #-ResolveDependency
 
           - task: PublishTestResults@2
-            displayName: 'Publish Test Results'
+            condition: and(succeeded(), eq(variables['jobNumber'], '1'))
+            displayName: 'Publish Integration Test Results'
             inputs:
-              testResultsFormat: 'NUnit'
-              testResultsFiles: '$(buildFolderName)/$(testResultFolderName)/NUnit*.xml'
-              testRunTitle: 'Unit (Windows Server 2016)'
-            condition: succeededOrFailed()
+              testResultsFormat: NUnit
+              testResultsFiles: '**/IntegrationTestResults.xml'
+              failTaskOnFailedTests: true
 
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish Output Folder'
+          - task: PublishBuildArtifacts@1
+            displayName: MOF
             inputs:
-              targetPath: '$(buildFolderName)/'
-              artifact: 'output'
-              publishLocation: 'pipeline'
-              parallel: true
+              PathtoPublish: '$(Build.SourcesDirectory)\output\MOF'
+              ArtifactName: MOF
 
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish MOF Files'
+          - task: PublishBuildArtifacts@1
+            displayName: 'Meta MOF'
             inputs:
-              targetPath: '$(buildFolderName)/MOF'
-              artifact: 'MOF'
-              publishLocation: 'pipeline'
-              parallel: true
+              PathtoPublish: '$(Build.SourcesDirectory)\output\MetaMOF'
+              ArtifactName: 'Meta MOF'
 
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish Meta MOF Files'
+          - task: PublishBuildArtifacts@1
+            displayName: RSOP
             inputs:
-              targetPath: '$(buildFolderName)/MetaMOF'
-              artifact: 'MetaMOF'
-              publishLocation: 'pipeline'
-              parallel: true
+              PathtoPublish: '$(Build.SourcesDirectory)\output\RSOP'
+              ArtifactName: RSOP
 
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish Compressed Modules'
+          - task: PublishBuildArtifacts@1
+            displayName: Rsop with Source Information
             inputs:
-              targetPath: '$(buildFolderName)/CompressedModules'
-              artifact: 'CompressedModules'
-              publishLocation: 'pipeline'
-              parallel: true
+              PathtoPublish: '$(Build.SourcesDirectory)\output\RsopWithSource'
+              ArtifactName: RsopWithSource
 
-          - task: PublishPipelineArtifact@1
-            displayName: 'Publish RSOP Files'
+          - task: PublishBuildArtifacts@1
+            condition: and(succeeded(), not(startsWith(variables['BHCommitMessage'], '--Added new node')), eq(variables['jobNumber'], '1'))
+            displayName: 'Compressed Modules'
             inputs:
-              targetPath: '$(buildFolderName)/RSOP'
-              artifact: 'RSOP'
-              publishLocation: 'pipeline'
-              parallel: true
+              PathtoPublish: '$(Build.SourcesDirectory)\output\CompressedModules'
+              ArtifactName: 'Modules'
+
+          - task: PublishTestResults@2
+            displayName: 'Publish Build Acceptance Test Results'
+            inputs:
+              testResultsFormat: NUnit
+              testResultsFiles: '**/AcceptanceTestResults.xml'
+              failTaskOnFailedTests: true
