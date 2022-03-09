@@ -33,7 +33,7 @@
     'DscResource.Test'           = 'latest'
 
     # Composites
-    CommonTasks                  = '0.6.1-preview0001'
+    #CommonTasks                  = '0.6.1-preview0001'
 
     # DSC Resources
     xPSDesiredStateConfiguration = '9.1.0'
