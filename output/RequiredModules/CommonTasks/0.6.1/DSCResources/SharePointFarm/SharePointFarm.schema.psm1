@@ -93,6 +93,7 @@ configuration SharePointFarm
 
 
     $ExecutionProperties = $PSBoundParameters
+    $ExecutionProperties.Remove('DependsOn')
     $ExecutionProperties.Add('Ensure', 'Present')
     $ExecutionProperties.Add('IsSingleInstance', 'Yes')
     $ExecutionProperties.Add('PsDscRunAsCredential', $SetupAccount)
@@ -100,13 +101,13 @@ configuration SharePointFarm
     $ExecutionProperties.Remove('InstanceName')
     $ExecutionProperties.Remove('SetupAccount')
 
-    #(Get-DscSplattedResource -ResourceName SPFarm -ExecutionName 'SharePointFarm' -Properties $ExecutionProperties -NoInvoke).Invoke($ExecutionProperties)
+    (Get-DscSplattedResource -ResourceName SPFarm -ExecutionName 'SharePointFarm' -Properties $ExecutionProperties -NoInvoke).Invoke($ExecutionProperties)
 
     # Setup Wizzard
     SPConfigWizard RunConfigWizard
     {
         IsSingleInstance     = "Yes"
         PsDscRunAsCredential = $SetupAccount
-        DependsOn = '[xGroup]LocalAdministrators'
+        DependsOn = '[SPFarm]SharePointFarm'
     }
 }
