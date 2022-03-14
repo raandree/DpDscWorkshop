@@ -652,8 +652,7 @@ configuration DscLcmController {
         $WriteTranscripts
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName ComputerManagementDsc
 
     xRegistry DscLcmController_MaintenanceWindowMode

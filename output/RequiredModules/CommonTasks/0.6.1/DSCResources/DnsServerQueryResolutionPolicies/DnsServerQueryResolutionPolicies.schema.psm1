@@ -7,7 +7,6 @@ configuration DnsServerQueryResolutionPolicies
         $Policies
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     foreach ($dnsPol in $Policies)
     {

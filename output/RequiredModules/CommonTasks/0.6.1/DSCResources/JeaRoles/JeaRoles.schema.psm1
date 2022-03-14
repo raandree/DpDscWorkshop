@@ -6,8 +6,7 @@ configuration JeaRoles {
 
     Import-Module JeaDsc
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName JeaDsc
+        Import-DscResource -ModuleName JeaDsc
 
     $pattern = '\\(?<Module>\w+)\\RoleCapabilities\\(?<RoleFile>\w+)\.psrc'
 

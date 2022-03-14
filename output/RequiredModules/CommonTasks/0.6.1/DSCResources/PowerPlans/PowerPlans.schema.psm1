@@ -16,8 +16,7 @@ configuration PowerPlans
         $Settings
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DSCR_PowerPlan
+        Import-DscResource -ModuleName DSCR_PowerPlan
 
     if (-not [string]::IsNullOrWhiteSpace($Hibernate))
     {

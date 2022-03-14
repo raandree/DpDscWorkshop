@@ -5,8 +5,7 @@ configuration RegistryValues {
         $Values
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     foreach ($value in $values)
     {

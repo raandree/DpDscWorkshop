@@ -265,8 +265,7 @@ configuration DnsServerSettings {
         $ZoneWritebackInterval
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DnsServerDsc
+        Import-DscResource -ModuleName DnsServerDsc
 
     $PSBoundParameters.Remove('InstanceName')
     $PSBoundParameters.Remove('DependsOn')

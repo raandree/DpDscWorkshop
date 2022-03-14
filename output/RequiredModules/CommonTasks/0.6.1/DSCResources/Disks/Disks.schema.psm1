@@ -6,8 +6,7 @@ configuration Disks
         $Disks
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName StorageDsc
+        Import-DscResource -ModuleName StorageDsc
 
     foreach ($disk in $Disks)
     {

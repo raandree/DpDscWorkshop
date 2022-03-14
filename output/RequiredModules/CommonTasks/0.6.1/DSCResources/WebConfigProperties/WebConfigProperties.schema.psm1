@@ -15,8 +15,7 @@ configuration WebConfigProperties {
     [Value = [string]]
     #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xWebAdministration
+        Import-DscResource -ModuleName xWebAdministration
 
     foreach ($item in $Items)
     {

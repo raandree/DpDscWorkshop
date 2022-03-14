@@ -5,8 +5,7 @@ configuration ConfigurationBase {
         [string]$SystemType
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     xRegistry EnableRdp
     {

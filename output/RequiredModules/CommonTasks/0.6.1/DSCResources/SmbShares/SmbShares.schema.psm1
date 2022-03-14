@@ -14,8 +14,7 @@ configuration SmbShares
         $Shares
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName ComputerManagementDsc
+        Import-DscResource -ModuleName ComputerManagementDsc
 
     if ($HostOS -eq 'Server')
     {

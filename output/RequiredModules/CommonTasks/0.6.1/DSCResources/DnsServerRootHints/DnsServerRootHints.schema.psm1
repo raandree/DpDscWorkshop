@@ -7,8 +7,7 @@ configuration DnsServerRootHints
         $RootHints
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DnsServerDsc
+        Import-DscResource -ModuleName DnsServerDsc
 
     $param = @{
         IsSingleInstance = 'Yes'

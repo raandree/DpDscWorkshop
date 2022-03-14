@@ -15,8 +15,7 @@ configuration Bitlocker
         $AutoDisks
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xBitlocker
+        Import-DscResource -ModuleName xBitlocker
 
     # First install the required Bitlocker features
     WindowsFeature BitlockerFeature
@@ -49,7 +48,7 @@ configuration Bitlocker
 
     if ($null -ne $Disks)
     {
-        foreach ($disk in $Disks) 
+        foreach ($disk in $Disks)
         {
             $disk.DependsOn = $nextDepends
 
@@ -73,7 +72,7 @@ configuration Bitlocker
             throw "ERROR: Before using 'Bitlocker - AutoDisks' the system drive encryption must be specified in the 'Bitlocker - Disks' section."
         }
 
-        foreach ($autoDisk in $AutoDisks) 
+        foreach ($autoDisk in $AutoDisks)
         {
             $autoDisk.DependsOn = $nextDepends
 

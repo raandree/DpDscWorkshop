@@ -17,8 +17,7 @@ configuration SharePointManagedPaths
     [PsDscRunAsCredential = [PSCredential]]
 #>
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName SharePointDSC
+        Import-DscResource -ModuleName SharePointDSC
 
     foreach ($item in $ManagedPaths)
     {

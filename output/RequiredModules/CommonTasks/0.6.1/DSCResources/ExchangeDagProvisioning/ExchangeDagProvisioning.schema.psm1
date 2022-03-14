@@ -53,8 +53,7 @@ configuration ExchangeDagProvisioning
     )
 
     #Import required DSC Modules
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xExchange
+        Import-DscResource -ModuleName xExchange
 
     #This first section only configures a single DAG node, the first member of the DAG.
     #The first member of the DAG will be responsible for DAG creation and maintaining its configuration

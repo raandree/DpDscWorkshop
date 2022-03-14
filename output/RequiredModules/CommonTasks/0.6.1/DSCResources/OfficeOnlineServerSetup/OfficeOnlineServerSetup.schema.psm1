@@ -36,7 +36,6 @@ configuration OfficeOnlineServerSetup
         $Path
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName OfficeOnlineServerDsc
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
 

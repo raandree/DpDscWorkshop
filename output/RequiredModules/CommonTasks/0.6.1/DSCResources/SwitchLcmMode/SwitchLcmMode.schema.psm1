@@ -17,7 +17,6 @@ configuration SwitchLcmMode
         $ConfigurationName
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     $TaskName = 'SwitchLcmMode'
 

@@ -28,8 +28,7 @@ configuration HyperV
         $VMMachines
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName 'xHyper-V'
+        Import-DscResource -ModuleName 'xHyper-V'
 
     [string]$dependsOnHostOS = $null
 

@@ -11,8 +11,7 @@ configuration ChocolateyPackages2nd {
         [hashtable[]]$Packages
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName Chocolatey
+        Import-DscResource -ModuleName Chocolatey
 
     if ($ForceRebootBefore -eq $true)
     {

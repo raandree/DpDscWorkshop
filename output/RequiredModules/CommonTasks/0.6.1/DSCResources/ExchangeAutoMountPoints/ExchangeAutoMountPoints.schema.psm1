@@ -52,8 +52,7 @@ configuration ExchangeAutoMountPoints {
         $VolumePrefix = 'EXVOL'
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -Module xExchange
+        Import-DscResource -Module xExchange
 
     if (-not $PSBoundParameters.ContainsKey('Identity'))
     {

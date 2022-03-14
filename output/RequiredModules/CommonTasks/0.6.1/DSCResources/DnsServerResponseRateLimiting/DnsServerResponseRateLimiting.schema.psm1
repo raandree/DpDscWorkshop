@@ -19,7 +19,6 @@ configuration DnsServerResponseRateLimiting
         $Exceptions
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     $RrlParams = @{
         Mode = $Mode

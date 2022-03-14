@@ -5,8 +5,7 @@ configuration FilesAndFolders
         [hashtable[]]$Items
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName FileSystemDsc
+        Import-DscResource -ModuleName FileSystemDsc
 
     foreach ($item in $Items)
     {

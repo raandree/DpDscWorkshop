@@ -25,8 +25,7 @@ configuration DscTagging {
         $Layers
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     if ($DisableGitCommitId -ne $false)
     {

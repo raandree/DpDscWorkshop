@@ -5,8 +5,7 @@ configuration WindowsServices {
         $Services
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
+        Import-DscResource -ModuleName xPSDesiredStateConfiguration
 
     foreach ($service in $Services)
     {

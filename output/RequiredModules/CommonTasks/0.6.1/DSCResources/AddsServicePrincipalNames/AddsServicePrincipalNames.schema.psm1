@@ -7,8 +7,7 @@ configuration AddsServicePrincipalNames
         $ServicePrincipalNames
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName ActiveDirectoryDsc
+        Import-DscResource -ModuleName ActiveDirectoryDsc
 
 
     foreach ($spn in $ServicePrincipalNames)

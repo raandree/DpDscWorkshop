@@ -78,8 +78,7 @@ configuration SharePointProvisioning
         $CentralAdminServerName
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName SharePointDSC
+        Import-DscResource -ModuleName SharePointDSC
 
     $PSBoundParameters.Add('Ensure', 'Present')
     $PSBoundParameters.Add('IsSingleInstance', 'Yes')

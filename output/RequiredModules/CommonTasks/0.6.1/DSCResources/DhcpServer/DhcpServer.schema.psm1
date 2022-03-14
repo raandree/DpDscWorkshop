@@ -28,8 +28,7 @@ configuration DhcpServer
         $EnableSecurityGroups
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName xDhcpServer
+        Import-DscResource -ModuleName xDhcpServer
 
     WindowsFeature DHCPServer
     {

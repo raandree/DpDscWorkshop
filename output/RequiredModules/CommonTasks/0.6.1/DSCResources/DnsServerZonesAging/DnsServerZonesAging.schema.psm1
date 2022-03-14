@@ -7,8 +7,7 @@ configuration DnsServerZonesAging
         $Zones
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DnsServerDsc
+        Import-DscResource -ModuleName DnsServerDsc
 
     foreach ($zone in $Zones)
     {

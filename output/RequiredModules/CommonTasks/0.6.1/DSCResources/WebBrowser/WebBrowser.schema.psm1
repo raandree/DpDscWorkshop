@@ -10,8 +10,7 @@ configuration WebBrowser
         $Edge
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName GPRegistryPolicyDsc
+        Import-DscResource -ModuleName GPRegistryPolicyDsc
 
 
     if (-not [string]::IsNullOrWhiteSpace($InternetExplorer.StartPage))

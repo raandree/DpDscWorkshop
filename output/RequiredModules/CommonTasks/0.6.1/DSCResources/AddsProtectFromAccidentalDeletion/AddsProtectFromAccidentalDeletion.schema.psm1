@@ -57,7 +57,6 @@ configuration AddsProtectFromAccidentalDeletion
         $FilterReplicationSite = '*'
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     if ( $ProtectDomain -eq $true )
     {

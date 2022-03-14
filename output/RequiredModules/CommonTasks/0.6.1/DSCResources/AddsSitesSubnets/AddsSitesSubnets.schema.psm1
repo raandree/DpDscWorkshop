@@ -11,8 +11,7 @@ configuration AddsSitesSubnets
         $Subnets
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName ActiveDirectoryDsc
+        Import-DscResource -ModuleName ActiveDirectoryDsc
 
     $siteDependencies = @()
     foreach ($site in $Sites)

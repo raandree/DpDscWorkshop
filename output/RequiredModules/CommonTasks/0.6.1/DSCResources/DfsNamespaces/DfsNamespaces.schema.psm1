@@ -11,8 +11,7 @@ configuration DfsNamespaces
         $NamespaceConfig
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DfsDsc
+        Import-DscResource -ModuleName DfsDsc
 
     DFSNamespaceServerConfiguration DFSNamespaceConfig
     {

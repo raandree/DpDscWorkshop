@@ -20,8 +20,7 @@ configuration ChocolateyPackages {
         [hashtable[]]$Packages
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName ComputerManagementDsc
+        Import-DscResource -ModuleName ComputerManagementDsc
     Import-DscResource -ModuleName Chocolatey
 
     $chocoSwExecName = 'Choco_Software'

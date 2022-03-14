@@ -11,8 +11,7 @@ configuration DnsServerForwarders
         $UseRootHint
     )
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DnsServerDsc
+        Import-DscResource -ModuleName DnsServerDsc
 
     WindowsFeature DNSServer
     {
