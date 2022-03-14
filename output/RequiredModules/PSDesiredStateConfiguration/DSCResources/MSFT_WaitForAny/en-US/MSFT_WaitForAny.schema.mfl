@@ -1,0 +1,13 @@
+﻿#pragma namespace("\\\\.\\root\\default")
+instance of __namespace{ name="MS_409";};
+#pragma namespace("\\\\.\\root\\default\\MS_409")
+
+[AMENDMENT, LOCALE(0x0409)] 
+class MSFT_WaitForAny : OMI_BaseResource
+{
+    [key, Description("Name of Resource on remote machine") : Amended] string ResourceName;
+    [Description("List of remote machines") : Amended] string NodeName[];
+    [Description("Time between various retries. Lower bound is 1.") : Amended] Uint64 RetryIntervalSec;
+    [Description("Maximum number of retries to check the state of resource.") : Amended] Uint32 RetryCount;
+    [Description("Number of machines to connect simultaneously. Default is new-cimsession default") : Amended] Uint32 ThrottleLimit;
+};

@@ -1,0 +1,16 @@
+﻿#pragma namespace("\\\\.\\root\\default")
+instance of __namespace{ name="MS_409";};
+#pragma namespace("\\\\.\\root\\default\\MS_409")
+
+[Description("This resource is used to manage local groups.") : Amended,AMENDMENT, LOCALE(0x0409)] 
+class MSFT_GroupResource : OMI_BaseResource
+{
+  [Key,Description("Name of the group.") : Amended] string GroupName;
+  [Description("An enumerated value that describes if the group is expected to exist on the machine.\nPresent {default}  \nAbsent   \n") : Amended] string Ensure;
+  [Description("Description of the group.") : Amended] string Description;
+  [Description("Full list of members for the group.") : Amended] string Members[];
+  [Description("List of members to ensure are included in the group membership.") : Amended] string MembersToInclude[];
+  [Description("List of members to ensure are not in the group membership.") : Amended] string MembersToExclude[];
+  [Description("List of members to ensure are included in the group membership.") : Amended] string Credential;
+};
+

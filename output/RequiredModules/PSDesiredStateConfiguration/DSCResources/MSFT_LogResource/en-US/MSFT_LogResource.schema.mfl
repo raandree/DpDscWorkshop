@@ -1,0 +1,9 @@
+﻿#pragma namespace("\\\\.\\root\\microsoft\\windows\\DesiredstateConfiguration")
+instance of __namespace{ name="MS_409";};
+#pragma namespace("\\\\.\\root\\microsoft\\windows\\DesiredstateConfiguration\\MS_409")
+
+[Description("This resource is used to send user provided messages to DSC specific ETW channel on the DSC managed node.") : Amended,AMENDMENT, LOCALE(0x0409)] 
+class MSFT_LogResource : OMI_BaseResource
+{
+};
+
