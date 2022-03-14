@@ -49,42 +49,81 @@ configuration OfficeOnlineServerSetup
         }
     }
 
-    xWindowsFeatureSet OfficeOnlineServer
+    $windowsFeatures = 'Web-Server',
+    'Web-Mgmt-Tools',
+    'Web-Mgmt-Console',
+    'Web-WebServer',
+    'Web-Common-Http',
+    'Web-Default-Doc',
+    'Web-Static-Content',
+    'Web-Performance',
+    'Web-Stat-Compression',
+    'Web-Dyn-Compression',
+    'Web-Security',
+    'Web-Filtering',
+    'Web-Windows-Auth',
+    'Web-App-Dev',
+    'Web-Net-Ext45',
+    'Web-Asp-Net45',
+    'Web-ISAPI-Ext',
+    'Web-ISAPI-Filter',
+    'Web-Includes',
+    'NET-Framework-Features',
+    'NET-Framework-Core',
+    'NET-HTTP-Activation',
+    'NET-Non-HTTP-Activ',
+    'NET-WCF-HTTP-Activation45',
+    'Server-Media-Foundation',
+    'Windows-Identity-Foundation'
+
+    $dependsOnWindowsFeature = @()
+    foreach ($windowsFeature in $windowsFeatures)
     {
-        Ensure = 'Present'
-        Name   = @(
-            'Web-Server',
-            'Web-Mgmt-Tools',
-            'Web-Mgmt-Console',
-            'Web-WebServer',
-            'Web-Common-Http',
-            'Web-Default-Doc',
-            'Web-Static-Content',
-            'Web-Performance',
-            'Web-Stat-Compression',
-            'Web-Dyn-Compression',
-            'Web-Security',
-            'Web-Filtering',
-            'Web-Windows-Auth',
-            'Web-App-Dev',
-            'Web-Net-Ext45',
-            'Web-Asp-Net45',
-            'Web-ISAPI-Ext',
-            'Web-ISAPI-Filter',
-            'Web-Includes',
-            'NET-Framework-Features',
-            'NET-Framework-Core',
-            'NET-HTTP-Activation',
-            'NET-Non-HTTP-Activ',
-            'NET-WCF-HTTP-Activation45',
-            'Server-Media-Foundation',
-            'Windows-Identity-Foundation'
-        )
+        WindowsFeature $windowsFeature
+        {
+            Ensure = 'Present'
+            Name   = $windowsFeature
+        }
+        $dependsOnWindowsFeature += "[WindowsFeature]$windowsFeature"
     }
+
+    #xWindowsFeatureSet OfficeOnlineServer
+    #{
+    #    Ensure = 'Present'
+    #    Name   = @(
+    #        'Web-Server',
+    #        'Web-Mgmt-Tools',
+    #        'Web-Mgmt-Console',
+    #        'Web-WebServer',
+    #        'Web-Common-Http',
+    #        'Web-Default-Doc',
+    #        'Web-Static-Content',
+    #        'Web-Performance',
+    #        'Web-Stat-Compression',
+    #        'Web-Dyn-Compression',
+    #        'Web-Security',
+    #        'Web-Filtering',
+    #        'Web-Windows-Auth',
+    #        'Web-App-Dev',
+    #        'Web-Net-Ext45',
+    #        'Web-Asp-Net45',
+    #        'Web-ISAPI-Ext',
+    #        'Web-ISAPI-Filter',
+    #        'Web-Includes',
+    #        'NET-Framework-Features',
+    #        'NET-Framework-Core',
+    #        'NET-HTTP-Activation',
+    #        'NET-Non-HTTP-Activ',
+    #        'NET-WCF-HTTP-Activation45',
+    #        'Server-Media-Foundation',
+    #        'Windows-Identity-Foundation'
+    #    )
+    #}
 
     xService WMIPerformanceAdapter
     {
-        DependsOn   = '[xWindowsFeatureSet]OfficeOnlineServer'
+        #DependsOn   = '[xWindowsFeatureSet]OfficeOnlineServer'
+        DependsOn   = $dependsOnWindowsFeature
         Name        = 'wmiApSrv'
         State       = 'Running'
         StartupType = 'Automatic'
@@ -149,7 +188,7 @@ configuration OfficeOnlineServerSetup
 
     OfficeOnlineServerInstall InstallBinaries
     {
-        Ensure    = "Present"
+        Ensure    = 'Present'
         Path      = $Path
         DependsOn = $softwareDependsOn
     }
