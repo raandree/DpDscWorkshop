@@ -6,21 +6,21 @@ Configurations:
 
 WindowsFeatures:
   Names:
-    - Web-Static-Content
-    - Web-Default-Doc
+    #- Web-Static-Content
+    #- Web-Default-Doc
     - Web-Http-Errors
     - Web-Asp-Net
     - Web-Net-Ext
-    - Web-ISAPI-Ext
-    - Web-ISAPI-Filter
+    #- Web-ISAPI-Ext
+    #- Web-ISAPI-Filter
     - Web-Http-Logging
     - Web-Request-Monitor
     - Web-Http-Tracing
-    - Web-Filtering
-    - Web-Stat-Compression
-    - Web-Dyn-Compression
-    - Web-Mgmt-Console
-    - Web-Windows-Auth
+    #- Web-Filtering
+    #- Web-Stat-Compression
+    #- Web-Dyn-Compression
+    #- Web-Mgmt-Console
+    #- Web-Windows-Auth
 
 FilesAndFolders:
   Items:
