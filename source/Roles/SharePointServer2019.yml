@@ -41,7 +41,7 @@ VirtualMemoryFiles:
       Type: CustomSize
       InitialSize: 37888
       MaximumSize: 37888
-      #DependsOn: '[Disk]6000C299BE71B34D8E37BBF7C07CCA4C::[Disks]Disks'
+      DependsOn: '[Disk]6000C299BE71B34D8E37BBF7C07CCA4C::[Disks]Disks'
     - Drive: Q
       Type: CustomSize
       InitialSize: 37888
