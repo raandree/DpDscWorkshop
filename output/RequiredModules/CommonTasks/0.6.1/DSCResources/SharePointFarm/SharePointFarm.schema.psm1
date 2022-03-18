@@ -1,4 +1,3 @@
- # SharePointDSC minimum version 5.0.0
 configuration SharePointFarm
 {
     param
@@ -79,11 +78,8 @@ configuration SharePointFarm
         $DatabaseCredentials
     )
 
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource -ModuleName SharePointDSC
-
-    $PSBoundParameters.Remove('InstanceName')
-
+    Import-DscResource -ModuleName xPSDesiredStateConfiguration
     # Make the Setup Account a local Administrator
     xGroup 'LocalAdministrators' {
         Ensure           = 'Present'
@@ -91,23 +87,30 @@ configuration SharePointFarm
         MembersToInclude =  $SetupAccount.UserName
     }
 
+    # Create or Join Farm with SPFarm
+    $spFarmValidParameters = @('AdminContentDatabaseName', 'ApplicationCredentialKey', 'CentralAdministrationAuth', 'CentralAdministrationPort', 'CentralAdministrationUrl', 'DatabaseCredentials', 'DatabaseServer', 'DeveloperDashboard', 'Ensure', 'FarmAccount', 'FarmConfigDatabaseName', 'Passphrase', 'RunCentralAdmin', 'ServerRole', 'SkipRegisterAsDistributedCacheHost',
+        'UseSQLAuthentication')
 
-    $ExecutionProperties = $PSBoundParameters
-    $ExecutionProperties.Remove('DependsOn')
-    $ExecutionProperties.Add('Ensure', 'Present')
-    $ExecutionProperties.Add('IsSingleInstance', 'Yes')
-    $ExecutionProperties.Add('PsDscRunAsCredential', $SetupAccount)
-    $ExecutionProperties.Add('DependsOn', '[xGroup]LocalAdministrators')
-    $ExecutionProperties.Remove('InstanceName')
-    $ExecutionProperties.Remove('SetupAccount')
+    $spFarm = @{
+        IsSingleInstance     = 'Yes'
+        PsDscRunAsCredential = $SetupAccount
+        DependsOn            = '[xGroup]LocalAdministrators'
+    }
+    foreach ($parameter in $spFarmValidParameters)
+    {
+        if ($PSBoundParameters.ContainsKey($parameter))
+        {
+            $spFarm.Add($parameter, $PSBoundParameters.Item($parameter))
+        }
+    }
+    (Get-DscSplattedResource -ResourceName SPFarm -ExecutionName 'SPFarm' -Properties $spFarm -NoInvoke).Invoke($spFarm)
 
-    (Get-DscSplattedResource -ResourceName SPFarm -ExecutionName 'SharePointFarm' -Properties $ExecutionProperties -NoInvoke).Invoke($ExecutionProperties)
 
     # Setup Wizzard
     SPConfigWizard RunConfigWizard
     {
         IsSingleInstance     = "Yes"
         PsDscRunAsCredential = $SetupAccount
-        DependsOn = '[SPFarm]SharePointFarm'
+        DependsOn            = '[SPFarm]SPFarm'
     }
 }
